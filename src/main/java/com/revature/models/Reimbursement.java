@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Column;
 import java.sql.Timestamp;
 
 @Entity
@@ -15,20 +16,34 @@ public class Reimbursement {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "REIMB_ID")
     private int id;
+    @Column(name = "REIMB_AMOUNT")
     private double amount;
+    @Column(name = "REIMB_SUBMITTED")
     private Timestamp submitted;
+    @Column(name = "REIMB_RESOLVED")
     private Timestamp resolved;
+    @Column(name = "REIMB_DESCRIPTION")
     private String description;
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinColumn(name="users_id")
+    @JoinColumn(name="ERS_USERS_ID")
+    @Column(name = "REIMB_AUTHOR")
     private User author;
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinColumn(name="users_id")
+    @JoinColumn(name="ERS_USERS_ID")
+    @Column(name = "REIMB_RESOLVER")
     private User resolver;
-    private String status;
+    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @JoinColumn(name="REIMB_STATUS_ID")
+    @Column(name = "REIMB_STATUS_ID")
+    private Status status;
+    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @JoinColumn(name="REIMB_TYPE_ID")
+    @Column(name = "REIMB_TYPE_ID")
+    private ReimbursementType type;
 
-    public Reimbursement(int id, double amount, Timestamp submitted, Timestamp resolved, String description, User author, User resolver, String status){
+    public Reimbursement(int id, double amount, Timestamp submitted, Timestamp resolved, String description, User author, User resolver, Status status){
         this.id = id;
         this.amount = amount;
         this.submitted = submitted;
@@ -95,12 +110,20 @@ public class Reimbursement {
         this.resolver = resolver;
     }
 
-    public String getStatus(){
+    public Status getStatus(){
         return status;
     }
 
-    public void setStatus(String status){
+    public void setStatus(Status status){
         this.status = status;
+    }
+
+    public ReimbursementType getType(){
+        return type;
+    }
+
+    public void setType(ReimbursementType type){
+        this.type = type;
     }
 
     @Override
@@ -110,9 +133,10 @@ public class Reimbursement {
         result += ", submitted: " + submitted;
         result += ", resolved: " + resolved;
         result += ", description: " + description;
-        result += ", author: " + author.getName();
-        result += ", resolver: " + resolver.getName();
+        result += ", author: " + author.getUsername();
+        result += ", resolver: " + resolver.getUsername();
         result += ", status: " + status;
+        result += ", type: " + type;
         return result;
     }
 
