@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Column;
 
-@Entity
+@Entity (name = "ERS_REIMBURSEMENT_TYPE")
 public class ReimbursementType {
     
     @Id

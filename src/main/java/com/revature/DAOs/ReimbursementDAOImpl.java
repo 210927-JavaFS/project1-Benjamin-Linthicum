@@ -10,20 +10,61 @@ import java.util.List;
 
 public class ReimbursementDAOImpl implements ReimbursementDAO{
 
+    @Override
     public List<Reimbursement> findAllReimbursements(){
-        return null; // TODO
+        Session session = HibernateUtil.getSession();
+        return session.createQuery("FROM ERS_REIMBURSEMENT").list();
     }
+
+    @Override
     public Reimbursement findById(int id){
-        return null; // TODO
+        Session session = HibernateUtil.getSession();
+        return session.get(Reimbursement.class, id);
     }
+
+    @Override
     public boolean addReimbursement(Reimbursement reimbursement){
-        return false; //TODO
+        try {
+            Session session = HibernateUtil.getSession();
+            Transaction tx = session.beginTransaction();
+            session.save(reimbursement);
+            tx.commit();
+            HibernateUtil.closeSession();
+            return true;
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
+
+    @Override
     public boolean updateReimbursement(Reimbursement reimbursement){
-        return false; //TODO
+        try {
+            Session session = HibernateUtil.getSession();
+            Transaction tx = session.beginTransaction();
+            session.merge(reimbursement);
+            tx.commit();
+            HibernateUtil.closeSession();
+            return true;
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
+
+    @Override
     public boolean deleteReimbursement(Reimbursement reimbursement){
-        return false; //TODO
+        try {
+            Session session = HibernateUtil.getSession();
+            Transaction tx = session.beginTransaction();
+            session.delete(reimbursement);
+            tx.commit();
+            HibernateUtil.closeSession();
+            return true;
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
     
 }

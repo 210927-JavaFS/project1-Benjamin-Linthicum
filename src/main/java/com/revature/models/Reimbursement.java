@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Column;
 import java.sql.Timestamp;
 
-@Entity
+@Entity (name = "ERS_REIMBURSEMENT")
 public class Reimbursement {
     
     @Id
