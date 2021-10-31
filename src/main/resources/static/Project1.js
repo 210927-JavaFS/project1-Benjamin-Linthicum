@@ -15,4 +15,18 @@ async function login(){
         body:JSON.stringify(user),
         credentials:"include"
     });
+
+    if(response.status===200) {
+        document.getElementsByClassName("loginClass").innerHTML = '';
+        console.log("Login successful!");
+    }
+    else {
+        if(!document.getElementById("loginFailed")){
+            let message = document.createElement("p");
+            message.id = "loginFailed";
+            message.setAttribute("style", "color:red");
+            message.innerText = "LOGIN FAILED";
+            document.getElementsByClassName("loginClass").appendChild(message);
+        }
+    }
 }

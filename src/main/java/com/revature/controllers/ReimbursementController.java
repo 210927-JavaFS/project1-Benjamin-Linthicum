@@ -113,7 +113,7 @@ public class ReimbursementController implements Controller{
         app.post("/reimbursements", this.addReimbursement);
         app.put("/reimbursements", this.updateReimbursement);
         app.delete("/reimbursements/:reimbursement", this.deleteReimbursement);
-        app.get("/reimbursements", this.getReimbursementsByStatus);
+        app.get("/reimbursements_by_status", this.getReimbursementsByStatus);
     }
 
 }

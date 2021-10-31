@@ -27,20 +27,16 @@ public class Reimbursement {
     @Column(name = "REIMB_DESCRIPTION")
     private String description;
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinColumn(name="ERS_USERS_ID")
-    @Column(name = "REIMB_AUTHOR", nullable = false)
+    @JoinColumn(name="REIMB_AUTHOR", nullable = false)
     private User author;
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinColumn(name="ERS_USERS_ID")
-    @Column(name = "REIMB_RESOLVER")
+    @JoinColumn(name="REIMB_RESOLVER", referencedColumnName="ERS_USER_ID")
     private User resolver;
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinColumn(name="REIMB_STATUS_ID")
-    @Column(name = "REIMB_STATUS_ID", nullable = false)
+    @JoinColumn(name="REIMB_STATUS_ID", referencedColumnName="ERS_USER_ID", nullable = false)
     private Status status;
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinColumn(name="REIMB_TYPE_ID")
-    @Column(name = "REIMB_TYPE_ID", nullable = false)
+    @JoinColumn(name="REIMB_TYPE_ID", nullable = false)
     private ReimbursementType type;
 
     public Reimbursement(int id, double amount, Timestamp submitted, Timestamp resolved, String description, User author, User resolver, Status status){
