@@ -14,7 +14,6 @@ import javax.persistence.Column;
 public class Status {
    
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "REIMB_STATUS_ID")
     private int id;
     @Column(name = "REIMB_STATUS")
