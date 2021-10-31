@@ -16,9 +16,9 @@ public class UserDAOImpl implements UserDAO{
     }
 
     @Override
-    public User findById(int id){
+    public User findByUsername(String username){
         Session session = HibernateUtil.getSession();
-        return session.get(User.class, id);
+        return session.get(User.class, username);
     }
 
     @Override

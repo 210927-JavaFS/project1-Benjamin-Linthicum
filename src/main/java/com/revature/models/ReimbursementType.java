@@ -16,7 +16,7 @@ public class ReimbursementType {
     @Id
     @Column(name = "REIMB_STATUS_ID")
     private int id;
-    @Column(name = "REIMB_TYPE")
+    @Column(name = "REIMB_TYPE", nullable = false)
     private String type;
 
     public ReimbursementType(int id, String type){

@@ -18,9 +18,9 @@ public class Reimbursement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "REIMB_ID")
     private int id;
-    @Column(name = "REIMB_AMOUNT")
+    @Column(name = "REIMB_AMOUNT", nullable = false)
     private double amount;
-    @Column(name = "REIMB_SUBMITTED")
+    @Column(name = "REIMB_SUBMITTED", nullable = false)
     private Timestamp submitted;
     @Column(name = "REIMB_RESOLVED")
     private Timestamp resolved;
@@ -28,7 +28,7 @@ public class Reimbursement {
     private String description;
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinColumn(name="ERS_USERS_ID")
-    @Column(name = "REIMB_AUTHOR")
+    @Column(name = "REIMB_AUTHOR", nullable = false)
     private User author;
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinColumn(name="ERS_USERS_ID")
@@ -36,11 +36,11 @@ public class Reimbursement {
     private User resolver;
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinColumn(name="REIMB_STATUS_ID")
-    @Column(name = "REIMB_STATUS_ID")
+    @Column(name = "REIMB_STATUS_ID", nullable = false)
     private Status status;
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinColumn(name="REIMB_TYPE_ID")
-    @Column(name = "REIMB_TYPE_ID")
+    @Column(name = "REIMB_TYPE_ID", nullable = false)
     private ReimbursementType type;
 
     public Reimbursement(int id, double amount, Timestamp submitted, Timestamp resolved, String description, User author, User resolver, Status status){

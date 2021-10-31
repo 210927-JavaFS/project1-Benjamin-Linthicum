@@ -16,7 +16,7 @@ public class Status {
     @Id
     @Column(name = "REIMB_STATUS_ID")
     private int id;
-    @Column(name = "REIMB_STATUS")
+    @Column(name = "REIMB_STATUS", nullable = false)
     private String status;
 
     public Status(int id, String status){

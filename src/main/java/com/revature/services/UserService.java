@@ -14,8 +14,8 @@ public class UserService {
         return userDao.findAllUsers();
     }
 
-    public User getUser(int id){
-        User user = userDao.findById(id);
+    public User getUser(String username){
+        User user = userDao.findByUsername(username);
         if(user != null){
             return user;
         }
@@ -32,9 +32,19 @@ public class UserService {
         return userDao.updateUser(user);
     }
 
-    public boolean deleteUser(int id){
-        User user = getUser(id);
+    public boolean deleteUser(String username){
+        User user = getUser(username);
         return userDao.deleteUser(user);
+    }
+
+    public boolean login(UserDTO userDto){
+        User user = userDao.findByUsername(userDto.username);
+
+        if(user!=null && (String.valueOf(userDto.password.hashCode())==user.getPassword())){
+            return true;
+        }
+
+        return false;
     }
 
 }

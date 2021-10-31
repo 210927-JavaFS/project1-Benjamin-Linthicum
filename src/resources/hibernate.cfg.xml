@@ -24,6 +24,9 @@
 		<!-- Mapping Entity Classes -->
 		<mapping class="com.revature.models.Reimbursement"/>
 		<mapping class="com.revature.models.User"/>
+		<mapping class="com.revature.models.ReimbursementType"/>
+		<mapping class="com.revature.models.Status"/>
+		<mapping class="com.revature.models.Role"/>
 	</session-factory>
 
 </hibernate-configuration>

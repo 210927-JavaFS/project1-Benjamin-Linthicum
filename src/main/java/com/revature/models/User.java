@@ -17,19 +17,19 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ERS_USERS_ID")
     private int id;    
-    @Column(name = "ERS_USER_NAME")
+    @Column(name = "ERS_USER_NAME", unique = true, nullable = false)
     private String username;
-    @Column(name = "ERS_PASSWORD")
+    @Column(name = "ERS_PASSWORD", nullable = false)
     private String password;
-    @Column(name = "USER_FIRST_NAME")
+    @Column(name = "USER_FIRST_NAME", nullable = false)
     private String firstName;
-    @Column(name = "USER_LAST_NAME")
+    @Column(name = "USER_LAST_NAME", nullable = false)
     private String lastName;
-    @Column(name = "USER_EMAIL")
+    @Column(name = "USER_EMAIL", unique = true, nullable = false)
     private String email;
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinColumn(name="ERS_USER_ROLE_ID")
-    @Column(name = "USER_ROLE_ID")
+    @Column(name = "USER_ROLE_ID", nullable = false)
     private Role role;
 
     public User(int id, String username, String password, String firstName, String lastName, String email, Role role){

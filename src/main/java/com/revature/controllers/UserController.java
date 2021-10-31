@@ -26,15 +26,13 @@ public class UserController implements Controller{
 
     public Handler getUser = (ctx) -> {
         if (ctx.req.getSession(false) != null) {
-            try {
-                int id = Integer.parseInt(ctx.pathParam("user"));
-                User user = userService.getUser(id);
-                ctx.json(user);
-                ctx.status(200);
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-                ctx.status(406);
-            }
+            String username = ctx.pathParam("user");
+            User user = userService.getUser(username);
+            ctx.json(user);
+            ctx.status(200);
+        }
+        else {
+            ctx.status(401);
         }
     };
 
@@ -70,21 +68,28 @@ public class UserController implements Controller{
 
     public Handler deleteUser = (ctx) -> {
         if (ctx.req.getSession(false) != null) {
-            String idString = ctx.pathParam("user");
-            try {
-                int id = Integer.parseInt(idString);
-                if (userService.deleteUser(id)) {
-                    ctx.status(200);
-                }
-                else {
-                    ctx.status(400);
-                }
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-                ctx.status(406);
+            String username = ctx.pathParam("user");
+            if (userService.deleteUser(username)) {
+                ctx.status(200);
+            }
+            else {
+                ctx.status(400);
             }
         }
         else {
+            ctx.status(401);
+        }
+    };
+
+    public Handler login = (ctx) -> {
+        UserDTO userDto = ctx.bodyAsClass(UserDTO.class);
+
+        if(userService.login(userDto)) {
+            ctx.req.getSession();
+            ctx.status(200);
+        }
+        else{
+            ctx.req.getSession().invalidate();
             ctx.status(401);
         }
     };
@@ -96,6 +101,7 @@ public class UserController implements Controller{
         app.post("/users", this.addUser);
         app.put("/users", this.updateUser);
         app.delete("/users:user", this.deleteUser);
+        app.post("/login", this.login);
     }
 
 }
