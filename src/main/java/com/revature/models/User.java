@@ -28,8 +28,7 @@ public class User {
     @Column(name = "USER_EMAIL", unique = true, nullable = false)
     private String email;
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinColumn(name="ERS_USER_ROLE_ID")
-    @Column(name = "USER_ROLE_ID", nullable = false)
+    @JoinColumn(name="USER_ROLE_ID", referencedColumnName="ERS_USER_ROLE_ID", table="ERS_USER_ROLES", nullable = false)
     private Role role;
 
     public User(int id, String username, String password, String firstName, String lastName, String email, Role role){
