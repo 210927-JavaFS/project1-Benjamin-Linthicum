@@ -54,6 +54,10 @@ public class Reimbursement {
         this.status = status;
     }
 
+    public Reimbursement(){
+        super();
+    }
+
     public int getId(){
         return id;
     }

@@ -1,5 +1,6 @@
 package com.revature.DAOs;
 import com.revature.models.Reimbursement;
+import com.revature.models.Status;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -65,6 +66,12 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public List<Reimbursement> findReimbursementsByStatus(Status status){
+        Session session = HibernateUtil.getSession();
+        return session.createQuery("FROM ERS_REIMBURSEMENT WHERE REIMB_STATUS_ID = " + status.getId()).list();
     }
     
 }
