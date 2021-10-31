@@ -90,6 +90,20 @@ public class ReimbursementController implements Controller{
         else {
             ctx.status(401);
         }
+    };
+
+    public Handler getReimbursementsByStatus = (ctx) -> {
+        if (ctx.req.getSession(false) != null) {
+            Status status = ctx.bodyAsClass(Status.class);
+            List<Reimbursement> list = reimbursementService.getReimbursementsByStatus(status);
+
+            ctx.json(list);
+            ctx.status(200);
+        }
+        else {
+            ctx.status(401);
+        }
+    };
     
 
     @Override
@@ -99,6 +113,7 @@ public class ReimbursementController implements Controller{
         app.post("/reimbursements", this.addReimbursement);
         app.put("/reimbursements", this.updateReimbursement);
         app.delete("/reimbursements/:reimbursement", this.deleteReimbursement);
+        app.get("/reimbursements", this.getReimbursementsByStatus);
     }
 
 }
