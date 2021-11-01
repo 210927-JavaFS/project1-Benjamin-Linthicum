@@ -6,12 +6,30 @@
         <title>Project 1</title>
     </head>
     <body class="container-fluid">
+        <div class="registerClass">
+            <h1>Register:</h1>
+            <form class="registerForm">
+                <label for="username">Username</label>
+                <input type="text" id="registerUsername" name="username">
+                <label for="password">Password</label>
+                <input type="password" id="registerPassword" name="password">
+                <label for="firstName">First name</label>
+                <input type="text" id="firstName" name="firstName">
+                <label for="lastName">Last name</label>
+                <input type="text" id="lastName" name="lastName">
+                <label for="email">Email</label>
+                <input type="email" id="email" name ="email">
+            </form>
+            <button id="registerButton">Register</button>
+            <button id="toLogin">Navigate to Login</button>
+        </div>
         <div class="loginClass">
+            <h1>Login:</h1>
             <form class="loginForm">
                 <label for="username">Username</label>
-                <input type="text" id="username" name="username">
+                <input type="text" id="loginUsername" name="username">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password">
+                <input type="password" id="loginPassword" name="password">
             </form>
             <button id="loginButton">Login</button>
             <button id="toRegistration">Navigate to Registration</button>
