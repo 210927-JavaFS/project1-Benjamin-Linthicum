@@ -39,7 +39,6 @@ public class UserService {
 
     public boolean login(UserDTO userDto){
         User user = userDao.findByUsername(userDto.username);
-        System.out.println(user);
         if(user!=null && (String.valueOf(userDto.password.hashCode()).equals(user.getPassword()))){
             return true;
         }

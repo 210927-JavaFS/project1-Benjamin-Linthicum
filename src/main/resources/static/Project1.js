@@ -173,8 +173,42 @@ function populateReimbursementTable(data , tbody){
         td = document.createElement("td");
         td.innerText=reimbursement.type;
         row.appendChild(td);
+        if(tbody.id==="pastTickets2Body" && reimbursement.status === "Pending"){
+            let bt = document.createElement("button");
+            bt.innerHTML = "Approve";
+            bt.value = reimbursement.id;
+            bt.onclick = approve(bt.value);
+            row.appendChild(bt);
+            bt = document.createElement("button");
+            bt.innerHTML = "Deny";
+            bt.value = reimbursement.id;
+            bt.onclick = deny(bt.value);
+            row.appendChild(bt);
+        }
         tbody.appendChild(row);
     }
+}
+
+async function approve(reimbursement_id){
+    let user = {
+        username:reimbursement_id,
+        password:document.getElementById("loginPassword").value // filler value that doesn't make chrome angry
+    }
+    let response = await fetch(URL+"reimbursements_by_username", {
+        method:"PUT",
+        body: JSON.stringify(user),
+        credentials:"include"
+    });
+    if(await response.status === 200){
+        console.log("Approved!");
+    }
+    else{
+        console.log("uh oh");
+    }
+}
+
+async function deny(reimbursement_id){
+
 }
 
 async function submitReimbursement(){

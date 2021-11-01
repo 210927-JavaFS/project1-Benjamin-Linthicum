@@ -16,19 +16,4 @@ public interface UserDAO {
     public boolean updateUser(User user);
     public boolean deleteUser(User user);
 
-    /*public static boolean populateRoles(){
-        try {
-            Session session = HibernateUtil.getSession();
-            Transaction tx = session.beginTransaction();
-            session.saveOrUpdate(new Role(1, "Employee"));
-            session.saveOrUpdate(new Role(2, "Manager"));
-            tx.commit();
-            HibernateUtil.closeSession();
-            return true;
-        } catch (HibernateException e) {
-            e.printStackTrace();
-            return false;
-        }
-    } */
-
 }

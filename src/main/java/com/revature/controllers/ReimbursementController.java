@@ -97,10 +97,19 @@ public class ReimbursementController implements Controller{
     public Handler getReimbursementsByStatus = (ctx) -> {
         if (ctx.req.getSession(false) != null) {
             try {
+                List<Reimbursement> list;
                 String status = ctx.bodyAsClass(UserDTO.class).username; //literally don't know another way I know it's stupid
-                List<Reimbursement> list = reimbursementService.getReimbursementsByStatus(status);
-
-                ctx.json(list);
+                if(((String)status).equals("All")){ // how the fuck do I get this to work idk
+                    list = reimbursementService.getAllReimbursements();
+                }
+                else{
+                    list = reimbursementService.getReimbursementsByStatus(status);
+                }
+                List<SanitizedReimbursement> finalList = new ArrayList<SanitizedReimbursement>();
+                for(Reimbursement r: list){
+                    finalList.add(new SanitizedReimbursement(r));
+                }
+                ctx.json(finalList);
                 ctx.status(200);
             } catch (NumberFormatException e) {
                 e.printStackTrace();
@@ -128,6 +137,26 @@ public class ReimbursementController implements Controller{
             ctx.status(401);
         }
     };
+
+    public Handler approveReimbursement = (ctx) -> {
+        if (ctx.req.getSession(false) != null) {
+            try {
+                int id = Integer.parseInt(ctx.bodyAsClass(UserDTO.class).username);
+                if(reimbursementService.approveReimbursement(id)) {
+                    ctx.status(200);
+                }
+                else {
+                    ctx.status(400);
+                }
+            } catch (NumberFormatException e){
+                e.printStackTrace();
+                ctx.status(406);
+            }
+        }
+        else {
+            ctx.status(401);
+        }
+    };
     
 
     @Override
@@ -139,6 +168,7 @@ public class ReimbursementController implements Controller{
         app.delete("/reimbursements/:reimbursement", this.deleteReimbursement);
         app.post("/reimbursements_by_status", this.getReimbursementsByStatus);
         app.post("/reimbursements_by_username", this.getReimbursementsByUsername);
+        app.put("/approve", this.approveReimbursement);
     }
 
 }
