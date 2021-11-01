@@ -80,6 +80,8 @@ public class UserController implements Controller{
     public Handler login = (ctx) -> {
         UserDTO userDto = ctx.bodyAsClass(UserDTO.class);
 
+        System.out.println(userDto.username + ", " + userDto.password);
+
         if(userService.login(userDto)) {
             ctx.req.getSession();
             ctx.json(userService.getUser(userDto.username).getRole());

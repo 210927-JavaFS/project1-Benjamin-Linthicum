@@ -20,9 +20,16 @@ public class UserDAOImpl implements UserDAO{
     @Override
     public User findByUsername(String username){
         Session session = HibernateUtil.getSession();
-        Query query = session.createQuery("FROM User WHERE username = '" + username + "'");
-        return (User)query.uniqueResult();
-        //return session.get(User.class, username);
+        //Query query = session.createQuery("FROM User WHERE username = '" + username + "'");
+        Query query = session.createQuery("FROM User");
+        List<User> list = query.list();
+        for(User u: list){
+            if(u.getUsername().equals(username)){
+                return u;
+            }
+        }
+        return null;
+        //return (User)query.uniqueResult();
     }
 
     @Override
