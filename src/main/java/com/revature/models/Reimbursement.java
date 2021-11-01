@@ -10,19 +10,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Column;
 import javax.persistence.Table;
+import javax.persistence.EnumType;
 import java.sql.Timestamp;
 import javax.persistence.SecondaryTables;
 import javax.persistence.SecondaryTable;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Enumerated;
 
 @Entity
 @Table (name = "ERS_REIMBURSEMENT")
-@SecondaryTables({
-    @SecondaryTable(name = "ERS_REIMBURSEMENT_STATUS", pkJoinColumns=@PrimaryKeyJoinColumn(name="REIMB_STATUS_ID")),
-    @SecondaryTable(name = "ERS_REIMBURSEMENT_TYPE", pkJoinColumns=@PrimaryKeyJoinColumn(name="REIMB_TYPE_ID"))
-})
 public class Reimbursement {
     
+    public enum ReimburseStatus { Pending, Approved, Denied};
+	public enum ReimburseType { LODGING, TRAVEL, FOOD, OTHER};
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "REIMB_ID")
@@ -41,12 +42,15 @@ public class Reimbursement {
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinColumn(name="REIMB_RESOLVER")
     private User resolver;
-    @Column(name="REIMB_STATUS", table="ERS_REIMBURSEMENT_STATUS", nullable = false)
-    private String status;
-    @Column(name="REIMB_TYPE", table="ERS_REIMBURSEMENT_TYPE", nullable = false)
-    private String type;
+    @Enumerated(EnumType.STRING)
+	@Column(name="REIMB_STATUS", nullable=false)
+	private ReimburseStatus status;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name="REIMB_TYPE", nullable=false)
+	private ReimburseType type;
 
-    public Reimbursement(int id, double amount, Timestamp submitted, Timestamp resolved, String description, User author, User resolver, String status, String type){
+    public Reimbursement(int id, double amount, Timestamp submitted, Timestamp resolved, String description, User author, User resolver, ReimburseStatus status, ReimburseType type){
         this.id = id;
         this.amount = amount;
         this.submitted = submitted;
@@ -118,19 +122,19 @@ public class Reimbursement {
         this.resolver = resolver;
     }
 
-    public String getStatus(){
+    public ReimburseStatus getStatus(){
         return status;
     }
 
-    public void setStatus(String status){
+    public void setStatus(ReimburseStatus status){
         this.status = status;
     }
 
-    public String getType(){
+    public ReimburseType getType(){
         return type;
     }
 
-    public void setType(String type){
+    public void setType(ReimburseType type){
         this.type = type;
     }
 

@@ -37,8 +37,8 @@ public class ReimbursementService {
         return reimbursementDao.deleteReimbursement(reimbursement);
     }
 
-    public List<Reimbursement> getReimbursementsByStatus(int statusId){
-        return reimbursementDao.findReimbursementsByStatus(statusId);
+    public List<Reimbursement> getReimbursementsByStatus(String status){
+        return reimbursementDao.findReimbursementsByStatus(status);
     }
 
     public List<Reimbursement> getReimbursementsByUsername(String username){

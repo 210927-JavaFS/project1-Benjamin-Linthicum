@@ -8,7 +8,9 @@ let viewTicketsButton = document.getElementById('viewPastTickets');
 let requestButton = document.getElementById('requestReimbursement');
 let submitButton = document.getElementById('submitReimbursement');
 let logoutButton = document.getElementById('logout');
+let logoutButton2 = document.getElementById('logout2');
 let backToMenu1 = document.getElementById('backToEmpMenu');
+let viewReimbursementsButton = document.getElementById('viewTickets');
 
 let registerElements = Array.prototype.slice.call(document.getElementsByClassName('registerClass'));
 let loginElements = Array.prototype.slice.call(document.getElementsByClassName('loginClass'));
@@ -25,7 +27,9 @@ viewTicketsButton.onclick = getReimbursements;
 requestButton.onclick = navigateToNewReimbursement;
 submitButton.onclick = submitReimbursement;
 backToMenu1.onclick = navigateToEmployeeMenu;
+viewReimbursementsButton.onclick = managerGetReimbursements;
 logoutButton.onclick = logout;
+logoutButton2.onclick = logout;
 
 let currentUser = null;
 
@@ -110,15 +114,36 @@ async function getReimbursements(){
 
     if(response.status === 200){
         let data = await response.json();
-        populateUserReimbursementTable(data);
+        populateReimbursementTable(data, document.getElementById("pastTicketsBody"));
     }
     else{
         console.log("uh oh");
     }
 }
 
-function populateUserReimbursementTable(data){
-    let tbody = document.getElementById("pastTicketsBody");
+async function managerGetReimbursements(){
+    // Making a user object because I literally don't know how to extract json information out on the Java end in any way
+    // other than a mapping to a class despite my best efforts
+    let user = {
+        username:document.getElementById("statusSelect").value,
+        password:document.getElementById("loginPassword").value // filler value that doesn't make chrome angry
+    }
+    let response = await fetch(URL+"reimbursements_by_status", {
+        method:"POST",
+        body: JSON.stringify(user),
+        credentials:"include"
+    });
+
+    if(response.status === 200){
+        let data = await response.json();
+        populateReimbursementTable(data, document.getElementById("pastTickets2Body"));
+    }
+    else{
+        console.log("uh oh");
+    }
+}
+
+function populateReimbursementTable(data , tbody){
 
     tbody.innerHTML="";
 
@@ -148,21 +173,6 @@ function populateUserReimbursementTable(data){
         td = document.createElement("td");
         td.innerText=reimbursement.type;
         row.appendChild(td);
-        /*row.appendChild(document.createElement("td").innerText=reimbursement.amount);
-        row.appendChild(document.createElement("td").innerText=reimbursement.submitted);
-        row.appendChild(document.createElement("td").innerText=reimbursement.resolved);
-        row.appendChild(document.createElement("td").innerText=reimbursement.description);
-        row.appendChild(document.createElement("td").innerText=reimbursement.author);
-        row.appendChild(document.createElement("td").innerText=reimbursement.resolver);
-        row.appendChild(document.createElement("td").innerText=reimbursement.status);
-        row.appendChild(document.createElement("td").innerText=reimbursement.type); */
-        /*for(let cell in reimbursement){
-            let td = document.createElement("td");
-            if(cell!="id"){
-                td.innerText=reimbursement[cell];
-            }
-            row.appendChild(td);
-        } */
         tbody.appendChild(row);
     }
 }

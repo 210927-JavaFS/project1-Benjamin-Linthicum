@@ -69,9 +69,9 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
     }
 
     @Override
-    public List<Reimbursement> findReimbursementsByStatus(int statusId){
+    public List<Reimbursement> findReimbursementsByStatus(String status){
         Session session = HibernateUtil.getSession();
-        return session.createQuery("FROM ERS_REIMBURSEMENT WHERE REIMB_STATUS_ID = " + statusId).list();
+        return session.createQuery("FROM Reimbursement WHERE REIMB_STATUS = " + status).list();
     }
 
     @Override

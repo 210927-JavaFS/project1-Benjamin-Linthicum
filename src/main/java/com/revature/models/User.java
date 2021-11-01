@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Column;
 import javax.persistence.Table;
 import javax.persistence.SecondaryTable;
@@ -15,9 +17,10 @@ import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 @Table (name = "ERS_USERS")
-@SecondaryTable(name = "ERS_USER_ROLES", pkJoinColumns = @PrimaryKeyJoinColumn(name = "ERS_USER_ROLE_ID"))
 public class User {
     
+    public enum User_Role {Employee, FinanceManager};
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ERS_USERS_ID")
@@ -32,10 +35,11 @@ public class User {
     private String lastName;
     @Column(name = "USER_EMAIL", unique = true, nullable = false)
     private String email;
-    @Column(name = "USER_ROLE", table = "ERS_USER_ROLES")
-    private String role;
+    @Enumerated(EnumType.STRING)
+	@Column(name="USER_ROLE", nullable=false)
+    private User_Role role;
 
-    public User(int id, String username, String password, String firstName, String lastName, String email, String role){
+    public User(int id, String username, String password, String firstName, String lastName, String email, User_Role role){
         this.id = id;
         this.username = username;
         this.password = password;
@@ -97,11 +101,11 @@ public class User {
         this.email = email;
     }
 
-    public String getRole(){
+    public User_Role getRole(){
         return role;
     }
 
-    public void setRole(String role){
+    public void setRole(User_Role role){
         this.role = role;
     }
 

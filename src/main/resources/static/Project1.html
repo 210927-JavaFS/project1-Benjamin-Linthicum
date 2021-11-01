@@ -17,6 +17,8 @@
     <body class="container-fluid">
         <div class="financeManagerMenu">
             <h1 id="welcome2"></h1>
+            <button id="logout2">Logout</button>
+            <br>
             <label for="statusSelect">Search by status:</label>
             <select name="statusSelect" id="statusSelect">
                 <option value="All">All</option>
@@ -26,7 +28,20 @@
             </select>
             <button id="viewTickets">View reimbursements</button>
             <br>
-            <button id="logout2">Logout</button>
+            <table id="pastTickets2">
+                <tr>
+                    <th>Amount</th>
+                    <th>Submitted timestamp</th>
+                    <th>Resolved timestamp</th>
+                    <th>Description</th>
+                    <th>Author</th>
+                    <th>Resolver</th>
+                    <th>Status</th>
+                    <th>Type</th>
+                </tr>
+                </thead>
+                <tbody id="pastTickets2Body"></tbody>
+            </table>
         </div>
         <div class="newReimbursement">
             <h1>Reimbursement Request Form</h1>

@@ -1,6 +1,7 @@
 package com.revature.models;
 import java.sql.Timestamp;
 import java.util.Objects;
+import com.revature.models.Reimbursement.*;
 
 // scrubs user passwords from reimbursements, allowing them to be passed safely to frontend
 public class SanitizedReimbursement {
@@ -11,8 +12,8 @@ public class SanitizedReimbursement {
     public String description;
     public String author; // only the username
     public String resolver; // only the username
-    public String status;
-    public String type;
+    public ReimburseStatus status;
+    public ReimburseType type;
 
     public SanitizedReimbursement(Reimbursement r){
         id = r.getId();

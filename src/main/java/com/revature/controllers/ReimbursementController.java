@@ -97,8 +97,8 @@ public class ReimbursementController implements Controller{
     public Handler getReimbursementsByStatus = (ctx) -> {
         if (ctx.req.getSession(false) != null) {
             try {
-                int statusId = Integer.parseInt(ctx.pathParam("status"));
-                List<Reimbursement> list = reimbursementService.getReimbursementsByStatus(statusId);
+                String status = ctx.bodyAsClass(UserDTO.class).username; //literally don't know another way I know it's stupid
+                List<Reimbursement> list = reimbursementService.getReimbursementsByStatus(status);
 
                 ctx.json(list);
                 ctx.status(200);
@@ -137,7 +137,7 @@ public class ReimbursementController implements Controller{
         app.post("/reimbursements", this.addReimbursement);
         app.put("/reimbursements", this.updateReimbursement);
         app.delete("/reimbursements/:reimbursement", this.deleteReimbursement);
-        app.get("/reimbursements_by_status", this.getReimbursementsByStatus);
+        app.post("/reimbursements_by_status", this.getReimbursementsByStatus);
         app.post("/reimbursements_by_username", this.getReimbursementsByUsername);
     }
 

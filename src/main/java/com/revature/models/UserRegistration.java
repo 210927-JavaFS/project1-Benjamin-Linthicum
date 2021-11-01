@@ -1,6 +1,6 @@
 package com.revature.models;
 
-import com.revature.models.User;
+import com.revature.models.User.*;
 
 public class UserRegistration {
     
@@ -9,7 +9,7 @@ public class UserRegistration {
     public String firstName;
     public String lastName;
     public String email;
-    public String role;
+    public User_Role role;
 
     public User convertToUser(){
         User user = new User();
