@@ -5,6 +5,8 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+import org.hibernate.criterion.Restrictions;
 import com.revature.utils.HibernateUtil;
 
 public class UserDAOImpl implements UserDAO{
@@ -12,13 +14,15 @@ public class UserDAOImpl implements UserDAO{
     @Override
     public List<User> findAllUsers(){
         Session session = HibernateUtil.getSession();
-        return session.createQuery("FROM ERS_USERS").list();
+        return session.createQuery("FROM Ers_users").list();
     }
 
     @Override
     public User findByUsername(String username){
         Session session = HibernateUtil.getSession();
-        return session.get(User.class, username);
+        Query query = session.createQuery("FROM User WHERE username = '" + username + "'");
+        return (User)query.uniqueResult();
+        //return session.get(User.class, username);
     }
 
     @Override

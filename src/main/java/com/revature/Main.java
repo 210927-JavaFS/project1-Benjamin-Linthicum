@@ -1,10 +1,11 @@
 package com.revature;
 
 import com.revature.controllers.*;
-import com.revature.DAOs.*;
 
 import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
+
+import com.revature.utils.HibernateUtil;
 
 public class Main {
     
@@ -24,6 +25,7 @@ public class Main {
         for(Controller c: controllers) {
             c.addRoutes(app);
         }
+        HibernateUtil.closeSession();
     }
 
 }
