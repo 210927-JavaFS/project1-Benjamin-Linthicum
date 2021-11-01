@@ -10,9 +10,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Column;
 import javax.persistence.Table;
+import javax.persistence.SecondaryTable;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 @Table (name = "ERS_USERS")
+@SecondaryTable(name = "ERS_USER_ROLES", pkJoinColumns = @PrimaryKeyJoinColumn(name = "ERS_USER_ROLE_ID"))
 public class User {
     
     @Id
@@ -29,11 +32,10 @@ public class User {
     private String lastName;
     @Column(name = "USER_EMAIL", unique = true, nullable = false)
     private String email;
-    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinColumn(name="USER_ROLE_ID", referencedColumnName="ERS_USER_ROLE_ID", table="ERS_USER_ROLES", nullable = false)
-    private Role role;
+    @Column(name = "USER_ROLE", table = "ERS_USER_ROLES")
+    private String role;
 
-    public User(int id, String username, String password, String firstName, String lastName, String email, Role role){
+    public User(int id, String username, String password, String firstName, String lastName, String email, String role){
         this.id = id;
         this.username = username;
         this.password = password;
@@ -95,11 +97,11 @@ public class User {
         this.email = email;
     }
 
-    public Role getRole(){
+    public String getRole(){
         return role;
     }
 
-    public void setRole(Role role){
+    public void setRole(String role){
         this.role = role;
     }
 

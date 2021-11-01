@@ -11,9 +11,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Column;
 import javax.persistence.Table;
 import java.sql.Timestamp;
+import javax.persistence.SecondaryTables;
+import javax.persistence.SecondaryTable;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 @Table (name = "ERS_REIMBURSEMENT")
+@SecondaryTables({
+    @SecondaryTable(name = "ERS_REIMBURSEMENT_STATUS", pkJoinColumns=@PrimaryKeyJoinColumn(name="REIMB_STATUS_ID")),
+    @SecondaryTable(name = "ERS_REIMBURSEMENT_TYPE", pkJoinColumns=@PrimaryKeyJoinColumn(name="REIMB_TYPE_ID"))
+})
 public class Reimbursement {
     
     @Id
@@ -29,19 +36,17 @@ public class Reimbursement {
     @Column(name = "REIMB_DESCRIPTION")
     private String description;
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinColumn(name="REIMB_AUTHOR", table="ERS_USERS", nullable = false)
+    @JoinColumn(name="REIMB_AUTHOR", nullable = false)
     private User author;
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinColumn(name="REIMB_RESOLVER", table="ERS_USERS")
+    @JoinColumn(name="REIMB_RESOLVER")
     private User resolver;
-    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinColumn(name="REIMB_STATUS_ID", table="ERS_REIMBURSEMENT_STATUS", nullable = false)
-    private Status status;
-    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinColumn(name="REIMB_TYPE_ID", table="ERS_REIMBURSEMENT_TYPE", nullable = false)
-    private ReimbursementType type;
+    @Column(name="REIMB_STATUS", table="ERS_REIMBURSEMENT_STATUS", nullable = false)
+    private String status;
+    @Column(name="REIMB_TYPE", table="ERS_REIMBURSEMENT_TYPE", nullable = false)
+    private String type;
 
-    public Reimbursement(int id, double amount, Timestamp submitted, Timestamp resolved, String description, User author, User resolver, Status status){
+    public Reimbursement(int id, double amount, Timestamp submitted, Timestamp resolved, String description, User author, User resolver, String status, String type){
         this.id = id;
         this.amount = amount;
         this.submitted = submitted;
@@ -50,6 +55,7 @@ public class Reimbursement {
         this.author = author;
         this.resolver = resolver;
         this.status = status;
+        this.type = type;
     }
 
     public Reimbursement(){
@@ -112,19 +118,19 @@ public class Reimbursement {
         this.resolver = resolver;
     }
 
-    public Status getStatus(){
+    public String getStatus(){
         return status;
     }
 
-    public void setStatus(Status status){
+    public void setStatus(String status){
         this.status = status;
     }
 
-    public ReimbursementType getType(){
+    public String getType(){
         return type;
     }
 
-    public void setType(ReimbursementType type){
+    public void setType(String type){
         this.type = type;
     }
 

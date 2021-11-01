@@ -1,7 +1,6 @@
 package com.revature.DAOs;
 
 import com.revature.models.User;
-import com.revature.models.Role;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -17,7 +16,7 @@ public interface UserDAO {
     public boolean updateUser(User user);
     public boolean deleteUser(User user);
 
-    public static boolean populateRoles(){
+    /*public static boolean populateRoles(){
         try {
             Session session = HibernateUtil.getSession();
             Transaction tx = session.beginTransaction();
@@ -30,6 +29,6 @@ public interface UserDAO {
             e.printStackTrace();
             return false;
         }
-    }
+    } */
 
 }

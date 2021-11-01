@@ -24,9 +24,6 @@ public class Main {
         for(Controller c: controllers) {
             c.addRoutes(app);
         }
-        UserDAO.populateRoles();
-        ReimbursementDAO.populateStatuses();
-        ReimbursementDAO.populateTypes();
     }
 
 }

@@ -94,11 +94,16 @@ public class ReimbursementController implements Controller{
 
     public Handler getReimbursementsByStatus = (ctx) -> {
         if (ctx.req.getSession(false) != null) {
-            Status status = ctx.bodyAsClass(Status.class);
-            List<Reimbursement> list = reimbursementService.getReimbursementsByStatus(status);
+            try {
+                int statusId = Integer.parseInt(ctx.pathParam("status"));
+                List<Reimbursement> list = reimbursementService.getReimbursementsByStatus(statusId);
 
-            ctx.json(list);
-            ctx.status(200);
+                ctx.json(list);
+                ctx.status(200);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                ctx.status(406);
+            }
         }
         else {
             ctx.status(401);

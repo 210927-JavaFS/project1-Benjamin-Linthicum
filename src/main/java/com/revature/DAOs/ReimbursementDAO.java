@@ -1,8 +1,6 @@
 package com.revature.DAOs;
 
 import com.revature.models.Reimbursement;
-import com.revature.models.Status;
-import com.revature.models.ReimbursementType;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -18,9 +16,9 @@ public interface ReimbursementDAO {
     public boolean addReimbursement(Reimbursement reimbursement);
     public boolean updateReimbursement(Reimbursement reimbursement);
     public boolean deleteReimbursement(Reimbursement reimbursement);
-    public List<Reimbursement> findReimbursementsByStatus(Status status);
+    public List<Reimbursement> findReimbursementsByStatus(int statusId);
 
-    public static boolean populateStatuses(){
+    /*public static boolean populateStatuses(){
         try {
             Session session = HibernateUtil.getSession();
             Transaction tx = session.beginTransaction();
@@ -51,6 +49,6 @@ public interface ReimbursementDAO {
             e.printStackTrace();
             return false;
         }
-    }
+    } */
 
 }
