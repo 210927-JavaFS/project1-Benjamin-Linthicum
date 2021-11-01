@@ -8,6 +8,8 @@ import com.revature.models.*;
 import io.javalin.Javalin;
 import io.javalin.http.Handler;
 
+import java.util.ArrayList;
+
 public class ReimbursementController implements Controller{
 
     private ReimbursementService reimbursementService = new ReimbursementService();
@@ -43,7 +45,7 @@ public class ReimbursementController implements Controller{
 
     public Handler addReimbursement = (ctx) -> {
         if (ctx.req.getSession(false) != null) {
-            Reimbursement reimbursement = ctx.bodyAsClass(Reimbursement.class);
+            Reimbursement reimbursement = ctx.bodyAsClass(ReimbSubmit.class).convertToReimbursement();
             if (reimbursementService.addReimbursement(reimbursement)) {
                 ctx.status(201);
             }
@@ -113,7 +115,11 @@ public class ReimbursementController implements Controller{
     public Handler getReimbursementsByUsername = (ctx) -> {
         if (ctx.req.getSession(false) != null) {
             String username = ctx.bodyAsClass(UserDTO.class).username;
-            List<Reimbursement> list = reimbursementService.getReimbursementsByUsername(username);
+            List<Reimbursement> rawList = reimbursementService.getReimbursementsByUsername(username);
+            List<SanitizedReimbursement> list = new ArrayList<SanitizedReimbursement>();
+            for(Reimbursement r: rawList){
+                list.add(new SanitizedReimbursement(r));
+            }
 
             ctx.json(list);
             ctx.status(200);

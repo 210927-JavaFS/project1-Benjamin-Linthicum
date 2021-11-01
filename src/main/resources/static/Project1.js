@@ -7,6 +7,7 @@ let toLoginButton = document.getElementById('toLogin');
 let viewTicketsButton = document.getElementById('viewPastTickets');
 let requestButton = document.getElementById('requestReimbursement');
 let submitButton = document.getElementById('submitReimbursement');
+let logoutButton = document.getElementById('logout');
 let backToMenu1 = document.getElementById('backToEmpMenu');
 
 let registerElements = Array.prototype.slice.call(document.getElementsByClassName('registerClass'));
@@ -23,6 +24,7 @@ viewTicketsButton.onclick = getReimbursements;
 requestButton.onclick = navigateToNewReimbursement;
 submitButton.onclick = submitReimbursement;
 backToMenu1.onclick = navigateToEmployeeMenu;
+logoutButton.onclick = logout;
 
 let currentUser = null;
 
@@ -54,6 +56,13 @@ async function login(){
             document.getElementsByClassName("loginClass")[0].appendChild(message);
         }
     }
+}
+
+function logout(){
+    currentUser = null;
+    document.getElementById("loginUsername").value = "";
+    document.getElementById("loginPassword").value = "";
+    navigateToLogin();
 }
 
 async function register(){
@@ -108,14 +117,45 @@ function populateUserReimbursementTable(data){
 
     for(let reimbursement of data){
         let row = document.createElement("tr");
-
-        for(let cell in reimbursement){
+        let td = document.createElement("td");
+        td.innerText="$" + reimbursement.amount;
+        row.appendChild(td);
+        td = document.createElement("td");
+        td.innerText=reimbursement.submitted;
+        row.appendChild(td);
+        td = document.createElement("td");
+        td.innerText=reimbursement.resolved ? reimbursement.resolved : "N/A";
+        row.appendChild(td);
+        td = document.createElement("td");
+        td.innerText=reimbursement.description;
+        row.appendChild(td);
+        td = document.createElement("td");
+        td.innerText=reimbursement.author;
+        row.appendChild(td);
+        td = document.createElement("td");
+        td.innerText=reimbursement.resolver;
+        row.appendChild(td);
+        td = document.createElement("td");
+        td.innerText=reimbursement.status;
+        row.appendChild(td);
+        td = document.createElement("td");
+        td.innerText=reimbursement.type;
+        row.appendChild(td);
+        /*row.appendChild(document.createElement("td").innerText=reimbursement.amount);
+        row.appendChild(document.createElement("td").innerText=reimbursement.submitted);
+        row.appendChild(document.createElement("td").innerText=reimbursement.resolved);
+        row.appendChild(document.createElement("td").innerText=reimbursement.description);
+        row.appendChild(document.createElement("td").innerText=reimbursement.author);
+        row.appendChild(document.createElement("td").innerText=reimbursement.resolver);
+        row.appendChild(document.createElement("td").innerText=reimbursement.status);
+        row.appendChild(document.createElement("td").innerText=reimbursement.type); */
+        /*for(let cell in reimbursement){
             let td = document.createElement("td");
             if(cell!="id"){
                 td.innerText=reimbursement[cell];
             }
             row.appendChild(td);
-        }
+        } */
         tbody.appendChild(row);
     }
 }
@@ -150,9 +190,6 @@ function navigateToRegistration(){
     loginElements.forEach(e => e.style.display = "none");
     employeeElements.forEach(e => e.style.display = "none")
     reimbursementElements.forEach(e => e.style.display = "none");
-    if(document.getElementById("loginFailed")){
-        document.getElementById("loginFailed").remove();
-    }
 }
 
 function navigateToLogin(){
@@ -160,6 +197,9 @@ function navigateToLogin(){
     loginElements.forEach(e => e.style.display = "inline");
     employeeElements.forEach(e => e.style.display = "none");
     reimbursementElements.forEach(e => e.style.display = "none");
+    if(document.getElementById("loginFailed")){
+        document.getElementById("loginFailed").remove();
+    }
 }
 
 function navigateToEmployeeMenu(){

@@ -70,7 +70,7 @@ public class Reimbursement {
         this.id = id;
     }
 
-    public double getamount(){
+    public double getAmount(){
         return amount;
     }
     
