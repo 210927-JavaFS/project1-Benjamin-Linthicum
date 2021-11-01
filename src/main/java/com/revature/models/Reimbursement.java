@@ -9,9 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Column;
+import javax.persistence.Table;
 import java.sql.Timestamp;
 
-@Entity (name = "ERS_REIMBURSEMENT")
+@Entity
+@Table (name = "ERS_REIMBURSEMENT")
 public class Reimbursement {
     
     @Id
@@ -30,10 +32,10 @@ public class Reimbursement {
     @JoinColumn(name="REIMB_AUTHOR", table="ERS_USERS", nullable = false)
     private User author;
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinColumn(name="REIMB_RESOLVER", referencedColumnName="ERS_USERS_ID", table="ERS_USERS")
+    @JoinColumn(name="REIMB_RESOLVER", table="ERS_USERS")
     private User resolver;
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinColumn(name="REIMB_STATUS_ID", referencedColumnName="ERS_USERS_ID", table="ERS_REIMBURSEMENT_STATUS", nullable = false)
+    @JoinColumn(name="REIMB_STATUS_ID", table="ERS_REIMBURSEMENT_STATUS", nullable = false)
     private Status status;
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinColumn(name="REIMB_TYPE_ID", table="ERS_REIMBURSEMENT_TYPE", nullable = false)

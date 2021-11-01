@@ -9,8 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Column;
+import javax.persistence.Table;
 
-@Entity (name = "ERS_REIMBURSEMENT_STATUS")
+@Entity
+@Table (name = "ERS_REIMBURSEMENT_STATUS")
 public class Status {
    
     @Id
