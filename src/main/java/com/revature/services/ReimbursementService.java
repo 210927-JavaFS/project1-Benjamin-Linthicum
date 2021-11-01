@@ -40,4 +40,8 @@ public class ReimbursementService {
     public List<Reimbursement> getReimbursementsByStatus(int statusId){
         return reimbursementDao.findReimbursementsByStatus(statusId);
     }
+
+    public List<Reimbursement> getReimbursementsByUsername(String username){
+        return reimbursementDao.findReimbursementsByUsername(username);
+    }
 }

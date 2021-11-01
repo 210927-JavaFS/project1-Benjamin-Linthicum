@@ -4,12 +4,42 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Project 1</title>
+        <style>
+            table {
+                width: 100%;
+            }
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+        </style>
     </head>
     <body class="container-fluid">
+        <div class="newReimbursement">
+            <h1>Reimbursement Request Form</h1>
+            <form class="reimbursementForm">
+                <label for="amount">Amount</label>
+                <input type="text" id="amount" name="amount" pattern="[0-9]+(\.[0-9]{2})?">
+            </form>
+        </div>
         <div class="employeeMenu">
             <h1 id="welcome"></h1>
             <button id="viewPastTickets">View past tickets</button>
             <button id="requestReimbursement">Request a new reimbursement</button>
+            <table id="pastTickets">
+                <tr>
+                    <th>Amount</th>
+                    <th>Submitted timestamp</th>
+                    <th>Resolved timestamp</th>
+                    <th>Description</th>
+                    <th>Author</th>
+                    <th>Resolver</th>
+                    <th>Status</th>
+                    <th>Type</th>
+                </tr>
+                </thead>
+                <tbody id="pastTicketsBody"></tbody>
+            </table>
         </div>
         <div class="registerClass">
             <h1>Register:</h1>

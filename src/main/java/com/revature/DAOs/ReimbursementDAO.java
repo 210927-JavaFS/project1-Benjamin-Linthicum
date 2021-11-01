@@ -17,38 +17,6 @@ public interface ReimbursementDAO {
     public boolean updateReimbursement(Reimbursement reimbursement);
     public boolean deleteReimbursement(Reimbursement reimbursement);
     public List<Reimbursement> findReimbursementsByStatus(int statusId);
-
-    /*public static boolean populateStatuses(){
-        try {
-            Session session = HibernateUtil.getSession();
-            Transaction tx = session.beginTransaction();
-            session.saveOrUpdate(new Status(1, "Pending"));
-            session.saveOrUpdate(new Status(2, "Approved"));
-            session.saveOrUpdate(new Status(3, "Denied"));
-            tx.commit();
-            HibernateUtil.closeSession();
-            return true;
-        } catch (HibernateException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public static boolean populateTypes(){
-        try {
-            Session session = HibernateUtil.getSession();
-            Transaction tx = session.beginTransaction();
-            session.saveOrUpdate(new ReimbursementType(1, "LODGING"));
-            session.saveOrUpdate(new ReimbursementType(2, "TRAVEL"));
-            session.saveOrUpdate(new ReimbursementType(3, "FOOD"));
-            session.saveOrUpdate(new ReimbursementType(4, "OTHER"));
-            tx.commit();
-            HibernateUtil.closeSession();
-            return true;
-        } catch (HibernateException e) {
-            e.printStackTrace();
-            return false;
-        }
-    } */
+    public List<Reimbursement> findReimbursementsByUsername(String username);
 
 }

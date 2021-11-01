@@ -3,6 +3,7 @@ import com.revature.models.Reimbursement;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import com.revature.DAOs.*;
 
 import com.revature.utils.HibernateUtil;
 
@@ -71,6 +72,13 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
     public List<Reimbursement> findReimbursementsByStatus(int statusId){
         Session session = HibernateUtil.getSession();
         return session.createQuery("FROM ERS_REIMBURSEMENT WHERE REIMB_STATUS_ID = " + statusId).list();
+    }
+
+    @Override
+    public List<Reimbursement> findReimbursementsByUsername(String username){
+        Session session = HibernateUtil.getSession();
+        int userId = new UserDAOImpl().findByUsername(username).getId();
+        return session.createQuery("FROM Reimbursement WHERE author = " + userId).list();
     }
     
 }

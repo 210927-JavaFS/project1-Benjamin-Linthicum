@@ -109,6 +109,19 @@ public class ReimbursementController implements Controller{
             ctx.status(401);
         }
     };
+
+    public Handler getReimbursementsByUsername = (ctx) -> {
+        if (ctx.req.getSession(false) != null) {
+            String username = ctx.bodyAsClass(UserDTO.class).username;
+            List<Reimbursement> list = reimbursementService.getReimbursementsByUsername(username);
+
+            ctx.json(list);
+            ctx.status(200);
+        }
+        else {
+            ctx.status(401);
+        }
+    };
     
 
     @Override
@@ -119,6 +132,7 @@ public class ReimbursementController implements Controller{
         app.put("/reimbursements", this.updateReimbursement);
         app.delete("/reimbursements/:reimbursement", this.deleteReimbursement);
         app.get("/reimbursements_by_status", this.getReimbursementsByStatus);
+        app.post("/reimbursements_by_username", this.getReimbursementsByUsername);
     }
 
 }
