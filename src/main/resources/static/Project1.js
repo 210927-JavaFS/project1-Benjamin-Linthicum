@@ -14,6 +14,7 @@ let registerElements = Array.prototype.slice.call(document.getElementsByClassNam
 let loginElements = Array.prototype.slice.call(document.getElementsByClassName('loginClass'));
 let employeeElements = Array.prototype.slice.call(document.getElementsByClassName('employeeMenu'));
 let reimbursementElements = Array.prototype.slice.call(document.getElementsByClassName('newReimbursement'));
+let managerElements = Array.prototype.slice.call(document.getElementsByClassName('financeManagerMenu'));
 navigateToLogin();
 
 loginButton.onclick = login;
@@ -43,9 +44,15 @@ async function login(){
     if(response.status===200) {
         document.getElementsByClassName("loginClass").innerHTML = '';
         console.log("Login successful!");
-        document.getElementById("welcome").innerText = "Welcome, " + document.getElementById("loginUsername").value + ".";
         currentUser = document.getElementById("loginUsername").value;
-        navigateToEmployeeMenu();
+        if(await response.json() === "Employee"){
+            document.getElementById("welcome").innerText = "Welcome, " + currentUser + ".";
+            navigateToEmployeeMenu();
+        }
+        else {
+            document.getElementById("welcome2").innerText = "Welcome, " + currentUser + ".";
+            navigateToManagerMenu();
+        }
     }
     else {
         if(!document.getElementById("loginFailed")){
@@ -190,6 +197,7 @@ function navigateToRegistration(){
     loginElements.forEach(e => e.style.display = "none");
     employeeElements.forEach(e => e.style.display = "none")
     reimbursementElements.forEach(e => e.style.display = "none");
+    managerElements.forEach(e => e.style.display = "none");
 }
 
 function navigateToLogin(){
@@ -197,6 +205,7 @@ function navigateToLogin(){
     loginElements.forEach(e => e.style.display = "inline");
     employeeElements.forEach(e => e.style.display = "none");
     reimbursementElements.forEach(e => e.style.display = "none");
+    managerElements.forEach(e => e.style.display = "none");
     if(document.getElementById("loginFailed")){
         document.getElementById("loginFailed").remove();
     }
@@ -207,6 +216,7 @@ function navigateToEmployeeMenu(){
     loginElements.forEach(e => e.style.display = "none");
     employeeElements.forEach(e => e.style.display = "inline")
     reimbursementElements.forEach(e => e.style.display = "none");
+    managerElements.forEach(e => e.style.display = "none");
 }
 
 function navigateToNewReimbursement(){
@@ -214,6 +224,15 @@ function navigateToNewReimbursement(){
     loginElements.forEach(e => e.style.display = "none");
     employeeElements.forEach(e => e.style.display = "none")
     reimbursementElements.forEach(e => e.style.display = "inline");
+    managerElements.forEach(e => e.style.display = "none");
+}
+
+function navigateToManagerMenu(){
+    registerElements.forEach(e => e.style.display = "none");
+    loginElements.forEach(e => e.style.display = "none");
+    employeeElements.forEach(e => e.style.display = "none")
+    reimbursementElements.forEach(e => e.style.display = "none");
+    managerElements.forEach(e => e.style.display = "inline");
 }
 
 function viewPastTickets(){

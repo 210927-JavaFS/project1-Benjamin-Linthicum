@@ -82,6 +82,7 @@ public class UserController implements Controller{
 
         if(userService.login(userDto)) {
             ctx.req.getSession();
+            ctx.json(userService.getUser(userDto.username).getRole());
             ctx.status(200);
         }
         else{
