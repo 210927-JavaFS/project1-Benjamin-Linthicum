@@ -4107,3 +4107,29 @@ com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot deserialize 
 03:54:30.241 [] [main] INFO  io.javalin.Javalin - Starting Javalin ...
 03:54:30.367 [] [main] INFO  io.javalin.Javalin - Listening on http://localhost:8081/
 03:54:30.367 [] [main] INFO  io.javalin.Javalin - Javalin started in 128ms \o/
+04:00:01.309 [] [main] INFO  org.eclipse.jetty.util.log - Logging initialized @346ms to org.eclipse.jetty.util.log.Slf4jLog
+04:00:01.367 [] [main] INFO  io.javalin.Javalin - Static file handler added:
+    {urlPathPrefix: "/", path: "/static", location: Location.CLASSPATH}
+    Resolved path: 'file:///C:/Users/Benjamin%20Linthicum/Desktop/Work/project1-Benjamin-Linthicum/target/classes/static/'
+04:00:01.467 [] [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.0.Final
+04:00:01.833 [] [main] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+04:00:01.991 [] [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+04:00:01.996 [] [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://javafs-210927-project-0.ci49jbdfz59e.us-east-2.rds.amazonaws.com:5432/Project0]
+04:00:01.997 [] [main] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, user=postgres}
+04:00:01.997 [] [main] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+04:00:02.000 [] [main] INFO  o.h.e.j.c.i.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20 (min=1)
+04:00:02.846 [] [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+04:00:03.550 [] [main] INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@383c3eb3] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+04:00:04.889 [] [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+04:00:04.899 [] [main] INFO  io.javalin.Javalin - 
+           __                      __ _
+          / /____ _ _   __ ____ _ / /(_)____
+     __  / // __ `/| | / // __ `// // // __ \
+    / /_/ // /_/ / | |/ // /_/ // // // / / /
+    \____/ \__,_/  |___/ \__,_//_//_//_/ /_/
+
+        https://javalin.io/documentation
+
+04:00:04.901 [] [main] INFO  io.javalin.Javalin - Starting Javalin ...
+04:00:05.010 [] [main] INFO  io.javalin.Javalin - Listening on http://localhost:8081/
+04:00:05.011 [] [main] INFO  io.javalin.Javalin - Javalin started in 111ms \o/

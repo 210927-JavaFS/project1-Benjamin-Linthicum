@@ -21,6 +21,7 @@ toLoginButton.onclick = navigateToLogin;
 toRegistrationButton.onclick = navigateToRegistration;
 viewTicketsButton.onclick = getReimbursements;
 requestButton.onclick = navigateToNewReimbursement;
+submitButton.onclick = submitReimbursement;
 backToMenu1.onclick = navigateToEmployeeMenu;
 
 let currentUser = null;
@@ -81,7 +82,6 @@ async function register(){
 }
 
 async function getReimbursements(){
-    console.log("hi");
     let user = {
         username:currentUser,
         password:document.getElementById("loginPassword").value // filler value that doesn't make chrome angry
@@ -118,6 +118,31 @@ function populateUserReimbursementTable(data){
         }
         tbody.appendChild(row);
     }
+}
+
+async function submitReimbursement(){
+    let reimbursement = {
+        amount:document.getElementById("amount").value,
+        description:document.getElementById("description").value,
+        author:currentUser,
+        type:document.getElementById("type").value
+    }
+
+    let response = await fetch(URL+"reimbursements", {
+        method:"POST",
+        body:JSON.stringify(reimbursement),
+        credentials:"include"
+    });
+
+    if (response.status === 200){
+        console.log("Reimbursement submitted successfully.");
+    }
+    else{
+        console.log("uh oh");
+    }
+
+    navigateToEmployeeMenu();
+
 }
 
 function navigateToRegistration(){
