@@ -177,7 +177,7 @@ function populateReimbursementTable(data , tbody){
             let bt = document.createElement("button");
             bt.innerHTML = "Approve";
             bt.value = reimbursement.id;
-            bt.onclick = approve(bt.value);
+            bt.onclick = approve(bt.value); // probably to blame
             row.appendChild(bt);
             bt = document.createElement("button");
             bt.innerHTML = "Deny";
