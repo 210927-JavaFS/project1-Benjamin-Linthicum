@@ -6,6 +6,8 @@ let toRegistrationButton = document.getElementById('toRegistration');
 let toLoginButton = document.getElementById('toLogin');
 let viewTicketsButton = document.getElementById('viewPastTickets');
 let requestButton = document.getElementById('requestReimbursement');
+let submitButton = document.getElementById('submitReimbursement');
+let backToMenu1 = document.getElementById('backToEmpMenu');
 
 let registerElements = Array.prototype.slice.call(document.getElementsByClassName('registerClass'));
 let loginElements = Array.prototype.slice.call(document.getElementsByClassName('loginClass'));
@@ -19,6 +21,7 @@ toLoginButton.onclick = navigateToLogin;
 toRegistrationButton.onclick = navigateToRegistration;
 viewTicketsButton.onclick = getReimbursements;
 requestButton.onclick = navigateToNewReimbursement;
+backToMenu1.onclick = navigateToEmployeeMenu;
 
 let currentUser = null;
 
