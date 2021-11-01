@@ -1,6 +1,7 @@
 const URL = "http://localhost:8081/";
 
 let loginButton = document.getElementById('loginButton');
+let registerButton = document.getElementById('registerButton');
 let toRegistrationButton = document.getElementById('toRegistration');
 let toLoginButton = document.getElementById('toLogin');
 
@@ -9,6 +10,7 @@ let loginElements = Array.prototype.slice.call(document.getElementsByClassName('
 registerElements.forEach(e => e.style.display = "none");
 
 loginButton.onclick = login;
+registerButton.onclick = register;
 toLoginButton.onclick = navigateToLogin;
 toRegistrationButton.onclick = navigateToRegistration;
 
@@ -39,9 +41,37 @@ async function login(){
     }
 }
 
+async function register(){
+    let user = {
+        username:document.getElementById("registerUsername").value,
+        password:document.getElementById("registerPassword").value,
+        firstName:document.getElementById("firstName").value,
+        lastName:document.getElementById("lastName").value,
+        email:document.getElementById("email").value,
+        role:"Employee"
+    }
+
+    let response = await fetch(URL+"register", {
+        method:"POST",
+        body:JSON.stringify(user),
+        credentials:"include"
+    });
+
+    if(response.status===200){
+        console.log("Registration successful!");
+        navigateToLogin();
+    }
+    else{
+        console.log("Registration failed.");
+    }
+}
+
 function navigateToRegistration(){
     registerElements.forEach(e => e.style.display = "inline");
     loginElements.forEach(e => e.style.display = "none");
+    if(document.getElementById("loginFailed")){
+        document.getElementById("loginFailed").remove();
+    }
 }
 
 function navigateToLogin(){

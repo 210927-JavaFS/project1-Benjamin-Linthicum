@@ -37,17 +37,13 @@ public class UserController implements Controller{
     };
 
     public Handler addUser = (ctx) -> {
-        if (ctx.req.getSession(false) != null) {
-            User user = ctx.bodyAsClass(User.class);
-            if (userService.addUser(user)) {
-                ctx.status(201);
-            }
-            else {
-                ctx.status(400);
-            }
+        User user = ctx.bodyAsClass(UserRegistration.class).convertToUser();
+        user.setPassword(String.valueOf(user.getPassword().hashCode()));
+        if (userService.addUser(user)) {
+            ctx.status(201);
         }
         else {
-            ctx.status(401);
+            ctx.status(400);
         }
     };
 
@@ -98,7 +94,7 @@ public class UserController implements Controller{
     public void addRoutes(Javalin app){
         app.get("/users", this.getAllUsers);
         app.get("/users/:user", this.getUser);
-        app.post("/users", this.addUser);
+        app.post("/register", this.addUser);
         app.put("/users", this.updateUser);
         app.delete("/users:user", this.deleteUser);
         app.post("/login", this.login);
