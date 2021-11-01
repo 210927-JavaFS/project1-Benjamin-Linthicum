@@ -57,7 +57,7 @@ async function register(){
         credentials:"include"
     });
 
-    if(response.status===200){
+    if(response.status===201){
         console.log("Registration successful!");
         navigateToLogin();
     }

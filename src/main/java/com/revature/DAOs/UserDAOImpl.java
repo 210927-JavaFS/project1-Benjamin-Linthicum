@@ -32,6 +32,7 @@ public class UserDAOImpl implements UserDAO{
             return true;
         } catch (HibernateException e) {
             e.printStackTrace();
+            HibernateUtil.closeSession();
             return false;
         }
     }
