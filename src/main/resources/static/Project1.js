@@ -7,7 +7,8 @@ let toLoginButton = document.getElementById('toLogin');
 
 let registerElements = Array.prototype.slice.call(document.getElementsByClassName('registerClass'));
 let loginElements = Array.prototype.slice.call(document.getElementsByClassName('loginClass'));
-registerElements.forEach(e => e.style.display = "none");
+let employeeElements = Array.prototype.slice.call(document.getElementsByClassName('employeeMenu'));
+navigateToLogin();
 
 loginButton.onclick = login;
 registerButton.onclick = register;
@@ -29,6 +30,8 @@ async function login(){
     if(response.status===200) {
         document.getElementsByClassName("loginClass").innerHTML = '';
         console.log("Login successful!");
+        document.getElementById("welcome").innerText = "Welcome, " + document.getElementById("loginUsername").value + ".";
+        navigateToEmployeeMenu();
     }
     else {
         if(!document.getElementById("loginFailed")){
@@ -69,6 +72,7 @@ async function register(){
 function navigateToRegistration(){
     registerElements.forEach(e => e.style.display = "inline");
     loginElements.forEach(e => e.style.display = "none");
+    employeeElements.forEach(e => e.style.display = "none")
     if(document.getElementById("loginFailed")){
         document.getElementById("loginFailed").remove();
     }
@@ -77,4 +81,11 @@ function navigateToRegistration(){
 function navigateToLogin(){
     registerElements.forEach(e => e.style.display = "none");
     loginElements.forEach(e => e.style.display = "inline");
+    employeeElements.forEach(e => e.style.display = "none");
+}
+
+function navigateToEmployeeMenu(){
+    registerElements.forEach(e => e.style.display = "none");
+    loginElements.forEach(e => e.style.display = "none");
+    employeeElements.forEach(e => e.style.display = "inline")
 }
