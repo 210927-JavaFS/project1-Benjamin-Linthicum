@@ -143,10 +143,10 @@ function populateReimbursementTable(data , tbody){
         td.innerText="$" + reimbursement.amount;
         row.appendChild(td);
         td = document.createElement("td");
-        td.innerText=reimbursement.submitted;
+        td.innerText=new Date(reimbursement.submitted);
         row.appendChild(td);
         td = document.createElement("td");
-        td.innerText=reimbursement.resolved ? reimbursement.resolved : "N/A";
+        td.innerText=reimbursement.resolved ? new Date(reimbursement.resolved) : "N/A";
         row.appendChild(td);
         td = document.createElement("td");
         td.innerText=reimbursement.description;
@@ -191,6 +191,7 @@ async function resolve(reimbursement, status){
     });
     if(response.status === 200){
         console.log("Resolved!");
+        managerGetReimbursements();
     }
     else{
         console.log("uh oh");
