@@ -167,13 +167,13 @@ function populateReimbursementTable(data , tbody){
         if(tbody.id==="pastTickets2Body" && reimbursement.status === "Pending"){
             let bt = document.createElement("button");
             bt.innerHTML = "Approve";
-            bt.id = reimbursement.author + "-approve" + count;
-            bt.onclick = function(){approve(reimbursement.author)};
+            bt.id = reimbursement.id + "-approve" + count;
+            bt.onclick = function(){approve(reimbursement.id)};
             row.appendChild(bt);
             bt = document.createElement("button");
             bt.innerHTML = "Deny";
-            bt.id = reimbursement.author + "-deny" + count;
-            bt.onclick = function(){deny(reimbursement.author)};
+            bt.id = reimbursement.id + "-deny" + count;
+            bt.onclick = function(){deny(reimbursement.id)};
             row.appendChild(bt);
         }
         tbody.appendChild(row);
@@ -181,13 +181,14 @@ function populateReimbursementTable(data , tbody){
     }
 }
 
-async function approve(reimbursement_author){
-    let response = await fetch(URL+"reimbursements/username", {
-        method:"POST",
-        body: JSON.stringify(reimbursement_author),
+async function approve(reimbursement_id){
+    console.log("id: " + reimbursement_id);
+    let response = await fetch(URL+"approve", {
+        method:"PUT",
+        body: JSON.stringify(reimbursement_id),
         credentials:"include"
     });
-    if(await response.status === 200){
+    if(response.status === 200){
         console.log("Approved!");
     }
     else{
@@ -196,7 +197,18 @@ async function approve(reimbursement_author){
 }
 
 async function deny(reimbursement_id){
-
+    console.log("author: " + reimbursement_id);
+    let response = await fetch(URL+"deny", {
+        method:"PUT",
+        body: JSON.stringify(reimbursement_id),
+        credentials:"include"
+    });
+    if(response.status === 200){
+        console.log("Denied!");
+    }
+    else{
+        console.log("uh oh");
+    }
 }
 
 async function submitReimbursement(){

@@ -98,5 +98,22 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
             return false;
         }
     }
+
+    @Override
+    public boolean denyReimbursement(int id){
+        try {
+            Session session = HibernateUtil.getSession();
+            Reimbursement r = findById(id);
+            r.setStatus(ReimburseStatus.Denied);
+            Transaction tx = session.beginTransaction();
+            session.merge(r);
+            tx.commit();
+            HibernateUtil.closeSession();
+            return true;
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     
 }

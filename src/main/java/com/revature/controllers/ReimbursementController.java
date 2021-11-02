@@ -141,8 +141,28 @@ public class ReimbursementController implements Controller{
     public Handler approveReimbursement = (ctx) -> {
         if (ctx.req.getSession(false) != null) {
             try {
-                int id = Integer.parseInt(ctx.bodyAsClass(UserDTO.class).username);
+                int id = Integer.parseInt(ctx.bodyAsClass(String.class));
                 if(reimbursementService.approveReimbursement(id)) {
+                    ctx.status(200);
+                }
+                else {
+                    ctx.status(400);
+                }
+            } catch (NumberFormatException e){
+                e.printStackTrace();
+                ctx.status(406);
+            }
+        }
+        else {
+            ctx.status(401);
+        }
+    };
+
+    public Handler denyReimbursement = (ctx) -> {
+        if (ctx.req.getSession(false) != null) {
+            try {
+                int id = Integer.parseInt(ctx.bodyAsClass(String.class));
+                if(reimbursementService.denyReimbursement(id)) {
                     ctx.status(200);
                 }
                 else {
@@ -169,6 +189,7 @@ public class ReimbursementController implements Controller{
         app.post("/reimbursements/status", this.getReimbursementsByStatus);
         app.post("/reimbursements/username", this.getReimbursementsByUsername);
         app.put("/approve", this.approveReimbursement);
+        app.put("/deny", this.denyReimbursement);
     }
 
 }
