@@ -17,16 +17,16 @@ let loginElements = Array.prototype.slice.call(document.getElementsByClassName('
 let employeeElements = Array.prototype.slice.call(document.getElementsByClassName('employeeMenu'));
 let reimbursementElements = Array.prototype.slice.call(document.getElementsByClassName('newReimbursement'));
 let managerElements = Array.prototype.slice.call(document.getElementsByClassName('financeManagerMenu'));
-navigateToLogin();
+navigate(loginElements);
 
 loginButton.onclick = login;
 registerButton.onclick = register;
-toLoginButton.onclick = navigateToLogin;
-toRegistrationButton.onclick = navigateToRegistration;
+toLoginButton.onclick = function(){navigate(loginElements);}
+toRegistrationButton.onclick = function(){navigate(registerElements);}
 viewTicketsButton.onclick = employeeGetReimbursements;
-requestButton.onclick = navigateToNewReimbursement;
+requestButton.onclick = function(){navigate(reimbursementElements);}
 submitButton.onclick = submitReimbursement;
-backToMenu1.onclick = navigateToEmployeeMenu;
+backToMenu1.onclick = function(){navigate(employeeElements);}
 viewReimbursementsButton.onclick = managerGetReimbursements;
 logoutButton.onclick = logout;
 logoutButton2.onclick = logout;
@@ -51,11 +51,11 @@ async function login(){
         currentUser = document.getElementById("loginUsername").value;
         if(await response.json() === "Employee"){
             document.getElementById("welcome").innerText = "Welcome, " + currentUser + ".";
-            navigateToEmployeeMenu();
+            navigate(employeeElements);
         }
         else {
             document.getElementById("welcome2").innerText = "Welcome, " + currentUser + ".";
-            navigateToManagerMenu();
+            navigate(managerElements);
         }
     }
     else {
@@ -73,7 +73,7 @@ function logout(){
     currentUser = null;
     document.getElementById("loginUsername").value = "";
     document.getElementById("loginPassword").value = "";
-    navigateToLogin();
+    navigate(loginElements);
 }
 
 async function register(){
@@ -94,7 +94,7 @@ async function register(){
 
     if(response.status===201){
         console.log("Registration successful!");
-        navigateToLogin();
+        navigate(loginElements);
     }
     else{
         console.log("Registration failed.");
@@ -137,6 +137,7 @@ function populateReimbursementTable(data , tbody){
 
     tbody.innerHTML="";
 
+    let count = 0;
     for(let reimbursement of data){
         let row = document.createElement("tr");
         let td = document.createElement("td");
@@ -166,27 +167,24 @@ function populateReimbursementTable(data , tbody){
         if(tbody.id==="pastTickets2Body" && reimbursement.status === "Pending"){
             let bt = document.createElement("button");
             bt.innerHTML = "Approve";
-            bt.value = reimbursement.id;
-            bt.onclick = approve(bt.value); // probably to blame
+            bt.id = reimbursement.author + "-approve" + count;
+            bt.onclick = function(){approve(reimbursement.author)};
             row.appendChild(bt);
             bt = document.createElement("button");
             bt.innerHTML = "Deny";
-            bt.value = reimbursement.id;
-            bt.onclick = deny(bt.value);
+            bt.id = reimbursement.author + "-deny" + count;
+            bt.onclick = function(){deny(reimbursement.author)};
             row.appendChild(bt);
         }
         tbody.appendChild(row);
+        count++;
     }
 }
 
-async function approve(reimbursement_id){
-    let user = {
-        username:reimbursement_id,
-        password:document.getElementById("loginPassword").value // filler value that doesn't make chrome angry
-    }
+async function approve(reimbursement_author){
     let response = await fetch(URL+"reimbursements/username", {
         method:"POST",
-        body: JSON.stringify(user),
+        body: JSON.stringify(reimbursement_author),
         credentials:"include"
     });
     if(await response.status === 200){
@@ -222,51 +220,21 @@ async function submitReimbursement(){
         console.log("uh oh");
     }
 
-    navigateToEmployeeMenu();
+    navigate(employeeElements);
 
 }
 
-function navigateToRegistration(){
-    registerElements.forEach(e => e.style.display = "inline");
+function navigate(elementsToDisplay){
+    console.log('hello');
+    registerElements.forEach(e => e.style.display = "none");
     loginElements.forEach(e => e.style.display = "none");
     employeeElements.forEach(e => e.style.display = "none")
     reimbursementElements.forEach(e => e.style.display = "none");
     managerElements.forEach(e => e.style.display = "none");
-}
-
-function navigateToLogin(){
-    registerElements.forEach(e => e.style.display = "none");
-    loginElements.forEach(e => e.style.display = "inline");
-    employeeElements.forEach(e => e.style.display = "none");
-    reimbursementElements.forEach(e => e.style.display = "none");
-    managerElements.forEach(e => e.style.display = "none");
+    elementsToDisplay.forEach(e => e.style.display = "inline");
     if(document.getElementById("loginFailed")){
         document.getElementById("loginFailed").remove();
     }
-}
-
-function navigateToEmployeeMenu(){
-    registerElements.forEach(e => e.style.display = "none");
-    loginElements.forEach(e => e.style.display = "none");
-    employeeElements.forEach(e => e.style.display = "inline")
-    reimbursementElements.forEach(e => e.style.display = "none");
-    managerElements.forEach(e => e.style.display = "none");
-}
-
-function navigateToNewReimbursement(){
-    registerElements.forEach(e => e.style.display = "none");
-    loginElements.forEach(e => e.style.display = "none");
-    employeeElements.forEach(e => e.style.display = "none")
-    reimbursementElements.forEach(e => e.style.display = "inline");
-    managerElements.forEach(e => e.style.display = "none");
-}
-
-function navigateToManagerMenu(){
-    registerElements.forEach(e => e.style.display = "none");
-    loginElements.forEach(e => e.style.display = "none");
-    employeeElements.forEach(e => e.style.display = "none")
-    reimbursementElements.forEach(e => e.style.display = "none");
-    managerElements.forEach(e => e.style.display = "inline");
 }
 
 function viewPastTickets(){
