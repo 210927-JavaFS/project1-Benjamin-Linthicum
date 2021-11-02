@@ -98,8 +98,8 @@ public class ReimbursementController implements Controller{
         if (ctx.req.getSession(false) != null) {
             try {
                 List<Reimbursement> list;
-                String status = ctx.bodyAsClass(UserDTO.class).username; //literally don't know another way I know it's stupid
-                if(((String)status).equals("All")){ // how the fuck do I get this to work idk
+                String status = ctx.bodyAsClass(String.class);
+                if(status.equals("All")){ // how the fuck do I get this to work idk
                     list = reimbursementService.getAllReimbursements();
                 }
                 else{
@@ -123,7 +123,7 @@ public class ReimbursementController implements Controller{
 
     public Handler getReimbursementsByUsername = (ctx) -> {
         if (ctx.req.getSession(false) != null) {
-            String username = ctx.bodyAsClass(UserDTO.class).username;
+            String username = ctx.bodyAsClass(String.class);
             List<Reimbursement> rawList = reimbursementService.getReimbursementsByUsername(username);
             List<SanitizedReimbursement> list = new ArrayList<SanitizedReimbursement>();
             for(Reimbursement r: rawList){
@@ -166,8 +166,8 @@ public class ReimbursementController implements Controller{
         app.post("/reimbursements", this.addReimbursement);
         app.put("/reimbursements", this.updateReimbursement);
         app.delete("/reimbursements/:reimbursement", this.deleteReimbursement);
-        app.post("/reimbursements_by_status", this.getReimbursementsByStatus);
-        app.post("/reimbursements_by_username", this.getReimbursementsByUsername);
+        app.post("/reimbursements/status", this.getReimbursementsByStatus);
+        app.post("/reimbursements/username", this.getReimbursementsByUsername);
         app.put("/approve", this.approveReimbursement);
     }
 

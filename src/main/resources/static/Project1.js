@@ -23,7 +23,7 @@ loginButton.onclick = login;
 registerButton.onclick = register;
 toLoginButton.onclick = navigateToLogin;
 toRegistrationButton.onclick = navigateToRegistration;
-viewTicketsButton.onclick = getReimbursements;
+viewTicketsButton.onclick = employeeGetReimbursements;
 requestButton.onclick = navigateToNewReimbursement;
 submitButton.onclick = submitReimbursement;
 backToMenu1.onclick = navigateToEmployeeMenu;
@@ -101,14 +101,10 @@ async function register(){
     }
 }
 
-async function getReimbursements(){
-    let user = {
-        username:currentUser,
-        password:document.getElementById("loginPassword").value // filler value that doesn't make chrome angry
-    }
-    let response = await fetch(URL+"reimbursements_by_username", {
+async function employeeGetReimbursements(){
+    let response = await fetch(URL+"reimbursements/username", {
         method:"POST",
-        body: JSON.stringify(user),
+        body: JSON.stringify(currentUser),
         credentials:"include"
     });
 
@@ -122,15 +118,9 @@ async function getReimbursements(){
 }
 
 async function managerGetReimbursements(){
-    // Making a user object because I literally don't know how to extract json information out on the Java end in any way
-    // other than a mapping to a class despite my best efforts
-    let user = {
-        username:document.getElementById("statusSelect").value,
-        password:document.getElementById("loginPassword").value // filler value that doesn't make chrome angry
-    }
-    let response = await fetch(URL+"reimbursements_by_status", {
+    let response = await fetch(URL+"reimbursements/status", {
         method:"POST",
-        body: JSON.stringify(user),
+        body: JSON.stringify(document.getElementById("statusSelect").value),
         credentials:"include"
     });
 
@@ -139,7 +129,7 @@ async function managerGetReimbursements(){
         populateReimbursementTable(data, document.getElementById("pastTickets2Body"));
     }
     else{
-        console.log("uh oh");
+        //console.log("uh oh");
     }
 }
 
@@ -194,8 +184,8 @@ async function approve(reimbursement_id){
         username:reimbursement_id,
         password:document.getElementById("loginPassword").value // filler value that doesn't make chrome angry
     }
-    let response = await fetch(URL+"reimbursements_by_username", {
-        method:"PUT",
+    let response = await fetch(URL+"reimbursements/username", {
+        method:"POST",
         body: JSON.stringify(user),
         credentials:"include"
     });
