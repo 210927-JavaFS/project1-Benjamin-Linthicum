@@ -137,7 +137,6 @@ function populateReimbursementTable(data , tbody){
 
     tbody.innerHTML="";
 
-    let count = 0;
     for(let reimbursement of data){
         let row = document.createElement("tr");
         let td = document.createElement("td");
@@ -167,44 +166,31 @@ function populateReimbursementTable(data , tbody){
         if(tbody.id==="pastTickets2Body" && reimbursement.status === "Pending"){
             let bt = document.createElement("button");
             bt.innerHTML = "Approve";
-            bt.id = reimbursement.id + "-approve" + count;
-            bt.onclick = function(){approve(reimbursement.id)};
+            bt.onclick = function(){resolve(reimbursement, "Approved")};
             row.appendChild(bt);
             bt = document.createElement("button");
             bt.innerHTML = "Deny";
-            bt.id = reimbursement.id + "-deny" + count;
-            bt.onclick = function(){deny(reimbursement.id)};
+            bt.onclick = function(){resolve(reimbursement, "Denied")};
             row.appendChild(bt);
         }
         tbody.appendChild(row);
-        count++;
     }
 }
 
-async function approve(reimbursement_id){
-    console.log("id: " + reimbursement_id);
-    let response = await fetch(URL+"approve", {
+async function resolve(reimbursement, status){
+    console.log("reimbursement: " + reimbursement.id);
+    let resolution = {
+        resolverName: currentUser,
+        reimbursement: reimbursement,
+        status: status
+    }
+    let response = await fetch(URL+"resolve", {
         method:"PUT",
-        body: JSON.stringify(reimbursement_id),
+        body: JSON.stringify(resolution),
         credentials:"include"
     });
     if(response.status === 200){
-        console.log("Approved!");
-    }
-    else{
-        console.log("uh oh");
-    }
-}
-
-async function deny(reimbursement_id){
-    console.log("author: " + reimbursement_id);
-    let response = await fetch(URL+"deny", {
-        method:"PUT",
-        body: JSON.stringify(reimbursement_id),
-        credentials:"include"
-    });
-    if(response.status === 200){
-        console.log("Denied!");
+        console.log("Resolved!");
     }
     else{
         console.log("uh oh");
@@ -218,22 +204,18 @@ async function submitReimbursement(){
         author:currentUser,
         type:document.getElementById("type").value
     }
-
     let response = await fetch(URL+"reimbursements", {
         method:"POST",
         body:JSON.stringify(reimbursement),
         credentials:"include"
     });
-
     if (response.status === 200){
         console.log("Reimbursement submitted successfully.");
     }
     else{
         console.log("uh oh");
     }
-
     navigate(employeeElements);
-
 }
 
 function navigate(elementsToDisplay){
@@ -263,8 +245,4 @@ function navigate(elementsToDisplay){
     }
     document.getElementById("pastTickets2Body").innerHTML = "";
     document.getElementById("pastTicketsBody").innerHTML = "";
-}
-
-function viewPastTickets(){
-
 }

@@ -31,4 +31,19 @@ public class SanitizedReimbursement {
         status = r.getStatus();
         type = r.getType();
     }
+
+    public SanitizedReimbursement(){
+    }
+
+    public Reimbursement convertToReimbursement(){
+        Reimbursement r = new Reimbursement();
+        r.setId(id);
+        r.setAmount(amount);
+        r.setSubmitted(submitted);
+        r.setResolved(resolved);
+        r.setDescription(description);
+        r.setStatus(status);
+        r.setType(type);
+        return r;
+    }
 }

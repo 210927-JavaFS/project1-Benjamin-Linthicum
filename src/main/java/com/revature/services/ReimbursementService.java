@@ -44,12 +44,4 @@ public class ReimbursementService {
     public List<Reimbursement> getReimbursementsByUsername(String username){
         return reimbursementDao.findReimbursementsByUsername(username);
     }
-
-    public boolean approveReimbursement(int id) {
-        return reimbursementDao.approveReimbursement(id);
-    }
-
-    public boolean denyReimbursement(int id) {
-        return reimbursementDao.denyReimbursement(id);
-    }
 }

@@ -3,16 +3,19 @@ package com.revature.controllers;
 import java.util.List;
 
 import com.revature.services.ReimbursementService;
+import com.revature.services.UserService;
 import com.revature.models.*;
 
 import io.javalin.Javalin;
 import io.javalin.http.Handler;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class ReimbursementController implements Controller{
 
     private ReimbursementService reimbursementService = new ReimbursementService();
+    private UserService userService = new UserService();
     
     public Handler getAllReimbursements = (ctx) -> {
         if (ctx.req.getSession(false) != null) {
@@ -138,11 +141,22 @@ public class ReimbursementController implements Controller{
         }
     };
 
-    public Handler approveReimbursement = (ctx) -> {
+    public Handler resolveReimbursement = (ctx) -> {
         if (ctx.req.getSession(false) != null) {
             try {
-                int id = Integer.parseInt(ctx.bodyAsClass(String.class));
-                if(reimbursementService.approveReimbursement(id)) {
+                ResolutionDTO resolution = ctx.bodyAsClass(ResolutionDTO.class);
+                Reimbursement reimbursement = resolution.reimbursement.convertToReimbursement();
+                reimbursement.setAuthor(userService.getUser(resolution.reimbursement.author));
+                if(reimbursement.getAuthor() == null){
+                    throw new Exception("Unable to retrieve author's User data from database.");
+                }
+                reimbursement.setStatus(resolution.status);
+                reimbursement.setResolver(userService.getUser(resolution.resolverName));
+                if(reimbursement.getResolver() == null){
+                    throw new Exception("Unable to retrieve resolver's User data from database.");
+                }
+                reimbursement.setResolved(new Timestamp(System.currentTimeMillis()));
+                if(reimbursementService.updateReimbursement(reimbursement)) {
                     ctx.status(200);
                 }
                 else {
@@ -151,26 +165,9 @@ public class ReimbursementController implements Controller{
             } catch (NumberFormatException e){
                 e.printStackTrace();
                 ctx.status(406);
-            }
-        }
-        else {
-            ctx.status(401);
-        }
-    };
-
-    public Handler denyReimbursement = (ctx) -> {
-        if (ctx.req.getSession(false) != null) {
-            try {
-                int id = Integer.parseInt(ctx.bodyAsClass(String.class));
-                if(reimbursementService.denyReimbursement(id)) {
-                    ctx.status(200);
-                }
-                else {
-                    ctx.status(400);
-                }
-            } catch (NumberFormatException e){
+            } catch (Exception e){
                 e.printStackTrace();
-                ctx.status(406);
+                ctx.status(400);
             }
         }
         else {
@@ -188,8 +185,7 @@ public class ReimbursementController implements Controller{
         app.delete("/reimbursements/:reimbursement", this.deleteReimbursement);
         app.post("/reimbursements/status", this.getReimbursementsByStatus);
         app.post("/reimbursements/username", this.getReimbursementsByUsername);
-        app.put("/approve", this.approveReimbursement);
-        app.put("/deny", this.denyReimbursement);
+        app.put("/resolve", this.resolveReimbursement);
     }
 
 }
