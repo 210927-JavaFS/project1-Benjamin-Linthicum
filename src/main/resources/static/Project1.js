@@ -237,16 +237,32 @@ async function submitReimbursement(){
 }
 
 function navigate(elementsToDisplay){
-    console.log('hello');
     registerElements.forEach(e => e.style.display = "none");
+    document.getElementById("registerForm").childNodes.forEach(e => {
+        if(e instanceof HTMLInputElement){
+            e.value = "";
+        }
+    });
+    document.getElementById("loginForm").childNodes.forEach(e => {
+        if(e instanceof HTMLInputElement){
+            e.value = "";
+        }
+    });
+    document.getElementById("reimbursementForm").childNodes.forEach(e => {
+        if(e instanceof HTMLInputElement){
+            e.value = "";
+        }
+    });
     loginElements.forEach(e => e.style.display = "none");
-    employeeElements.forEach(e => e.style.display = "none")
     reimbursementElements.forEach(e => e.style.display = "none");
+    employeeElements.forEach(e => e.style.display = "none");
     managerElements.forEach(e => e.style.display = "none");
     elementsToDisplay.forEach(e => e.style.display = "inline");
     if(document.getElementById("loginFailed")){
         document.getElementById("loginFailed").remove();
     }
+    document.getElementById("pastTickets2Body").innerHTML = "";
+    document.getElementById("pastTicketsBody").innerHTML = "";
 }
 
 function viewPastTickets(){
