@@ -8,9 +8,13 @@ import com.revature.models.*;
 import io.javalin.Javalin;
 import io.javalin.http.Handler;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class UserController implements Controller{
 
     private UserService userService = new UserService();
+    private Logger log = LoggerFactory.getLogger(UserController.class);
     
     public Handler getAllUsers = (ctx) -> {
         if (ctx.req.getSession(false) != null) {
@@ -84,6 +88,7 @@ public class UserController implements Controller{
             ctx.req.getSession();
             ctx.json(userService.getUser(userDto.username).getRole());
             ctx.status(200);
+            log.info("User " + userDto.username + " logged in.");
         }
         else{
             ctx.req.getSession().invalidate();

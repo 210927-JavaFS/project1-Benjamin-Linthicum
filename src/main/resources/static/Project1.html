@@ -19,8 +19,10 @@
             <h1 id="welcome2"></h1>
             <button id="logout2">Logout</button>
             <p>Please remember our company policy for reimbursement approval:</p>
-            <p>1.) When they win, we lose.</p>
-            <p>2.) Don't get sued.</p>
+            <ul>
+                <li>When they win, we lose.</li>
+                <li>Don't get us sued.</li>
+            </ul>
             <br>
             <label for="statusSelect">Search by status:</label>
             <select name="statusSelect" id="statusSelect">
@@ -50,7 +52,7 @@
             <h1>Reimbursement Request Form</h1>
             <form id="reimbursementForm">
                 <label for="amount">Amount:</label>
-                <input type="text" id="amount" name="amount" pattern="[0-9]+(\.[0-9]{2})?">
+                <input type="text" id="amount" name="amount" pattern="^[0-9]+(\.[0-9]{2}?)?$">
                 <br>
                 <label for="description">Description:</label>
                 <input type="text" id="description", name="description">

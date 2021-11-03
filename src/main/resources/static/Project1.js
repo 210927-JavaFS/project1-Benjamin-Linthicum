@@ -199,6 +199,16 @@ async function resolve(reimbursement, status){
 }
 
 async function submitReimbursement(){
+    if(!new RegExp(document.getElementById("amount").pattern).test(document.getElementById("amount").value)){
+        if(!document.getElementById("submitFailed")){
+            let message = document.createElement("p");
+            message.id = "submitFailed";
+            message.setAttribute("style", "color:red");
+            message.innerText = "Submission failed; invalid input in amount field.";
+            document.getElementsByClassName("newReimbursement")[0].appendChild(message);
+        }
+        return;
+    }
     let reimbursement = {
         amount:document.getElementById("amount").value,
         description:document.getElementById("description").value,
@@ -243,6 +253,9 @@ function navigate(elementsToDisplay){
     elementsToDisplay.forEach(e => e.style.display = "inline");
     if(document.getElementById("loginFailed")){
         document.getElementById("loginFailed").remove();
+    }
+    if(document.getElementById("submitFailed")){
+        document.getElementById("submitFailed").remove();
     }
     document.getElementById("pastTickets2Body").innerHTML = "";
     document.getElementById("pastTicketsBody").innerHTML = "";

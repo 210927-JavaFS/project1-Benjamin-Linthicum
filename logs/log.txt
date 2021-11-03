@@ -50,3 +50,171 @@
 18:25:50.201 [] [main] INFO  io.javalin.Javalin - Starting Javalin ...
 18:25:50.302 [] [main] INFO  io.javalin.Javalin - Listening on http://localhost:8081/
 18:25:50.303 [] [main] INFO  io.javalin.Javalin - Javalin started in 103ms \o/
+00:12:58.753 [] [main] INFO  org.eclipse.jetty.util.log - Logging initialized @351ms to org.eclipse.jetty.util.log.Slf4jLog
+00:12:58.811 [] [main] INFO  io.javalin.Javalin - Static file handler added:
+    {urlPathPrefix: "/", path: "/static", location: Location.CLASSPATH}
+    Resolved path: 'file:///C:/Users/Benjamin%20Linthicum/Desktop/Work/project1-Benjamin-Linthicum/target/classes/static/'
+00:12:58.919 [] [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.0.Final
+00:12:59.285 [] [main] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+00:12:59.448 [] [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+00:12:59.453 [] [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://javafs-210927-project-0.ci49jbdfz59e.us-east-2.rds.amazonaws.com:5432/Project0]
+00:12:59.454 [] [main] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, user=postgres}
+00:12:59.454 [] [main] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+00:12:59.457 [] [main] INFO  o.h.e.j.c.i.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20 (min=1)
+00:13:00.429 [] [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+00:13:01.133 [] [main] INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@342e690b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+00:13:01.827 [] [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+00:13:01.836 [] [main] INFO  io.javalin.Javalin - 
+           __                      __ _
+          / /____ _ _   __ ____ _ / /(_)____
+     __  / // __ `/| | / // __ `// // // __ \
+    / /_/ // /_/ / | |/ // /_/ // // // / / /
+    \____/ \__,_/  |___/ \__,_//_//_//_/ /_/
+
+        https://javalin.io/documentation
+
+00:13:01.838 [] [main] INFO  io.javalin.Javalin - Starting Javalin ...
+00:13:01.944 [] [main] INFO  io.javalin.Javalin - Listening on http://localhost:8081/
+00:13:01.944 [] [main] INFO  io.javalin.Javalin - Javalin started in 107ms \o/
+00:13:22.570 [] [qtp1209358542-28] INFO  c.r.controllers.UserController - User Employee logged in.
+00:13:24.325 [] [qtp1209358542-24] INFO  c.r.c.ReimbursementController - Reimbursements retrieved by employee with username Employee.
+00:13:57.168 [] [qtp1209358542-19] INFO  c.r.controllers.UserController - User Manager logged in.
+00:13:58.728 [] [qtp1209358542-30] INFO  c.r.c.ReimbursementController - Reimbursements retrieved by finance manager, filtered by: All
+00:14:13.799 [] [qtp1209358542-28] INFO  c.r.c.ReimbursementController - Reimbursements retrieved by finance manager, filtered by: Pending
+00:14:16.195 [] [qtp1209358542-30] INFO  c.r.c.ReimbursementController - Reimbursements retrieved by finance manager, filtered by: Approved
+00:14:18.474 [] [qtp1209358542-28] INFO  c.r.c.ReimbursementController - Reimbursements retrieved by finance manager, filtered by: Denied
+00:14:21.612 [] [qtp1209358542-30] INFO  c.r.c.ReimbursementController - Reimbursements retrieved by finance manager, filtered by: All
+00:15:24.840 [] [qtp1209358542-19] INFO  c.r.controllers.UserController - User Manager logged in.
+00:17:38.624 [] [main] INFO  org.eclipse.jetty.util.log - Logging initialized @351ms to org.eclipse.jetty.util.log.Slf4jLog
+00:17:38.680 [] [main] INFO  io.javalin.Javalin - Static file handler added:
+    {urlPathPrefix: "/", path: "/static", location: Location.CLASSPATH}
+    Resolved path: 'file:///C:/Users/Benjamin%20Linthicum/Desktop/Work/project1-Benjamin-Linthicum/target/classes/static/'
+00:17:38.786 [] [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.0.Final
+00:17:39.178 [] [main] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+00:17:39.339 [] [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+00:17:39.344 [] [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://javafs-210927-project-0.ci49jbdfz59e.us-east-2.rds.amazonaws.com:5432/Project0]
+00:17:39.345 [] [main] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, user=postgres}
+00:17:39.345 [] [main] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+00:17:39.348 [] [main] INFO  o.h.e.j.c.i.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20 (min=1)
+00:17:40.238 [] [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+00:17:40.950 [] [main] INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@342e690b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+00:17:41.654 [] [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+00:17:41.664 [] [main] INFO  io.javalin.Javalin - 
+           __                      __ _
+          / /____ _ _   __ ____ _ / /(_)____
+     __  / // __ `/| | / // __ `// // // __ \
+    / /_/ // /_/ / | |/ // /_/ // // // / / /
+    \____/ \__,_/  |___/ \__,_//_//_//_/ /_/
+
+        https://javalin.io/documentation
+
+00:17:41.667 [] [main] INFO  io.javalin.Javalin - Starting Javalin ...
+00:17:41.771 [] [main] INFO  io.javalin.Javalin - Listening on http://localhost:8081/
+00:17:41.772 [] [main] INFO  io.javalin.Javalin - Javalin started in 107ms \o/
+00:17:54.710 [] [qtp1209358542-24] INFO  c.r.controllers.UserController - User Manager logged in.
+00:19:54.671 [] [qtp1209358542-24] INFO  c.r.c.ReimbursementController - Reimbursements retrieved by finance manager, filtered by: All
+00:22:28.558 [] [qtp1209358542-21] INFO  c.r.controllers.UserController - User Employee3 logged in.
+00:22:57.723 [] [qtp1209358542-24] INFO  c.r.c.ReimbursementController - Reimbursement request submitted, type: OTHER, description: just give it.
+00:22:59.108 [] [qtp1209358542-31] INFO  c.r.c.ReimbursementController - Reimbursements retrieved by employee with username Employee3.
+00:23:08.534 [] [qtp1209358542-24] INFO  c.r.controllers.UserController - User Manager logged in.
+00:23:10.409 [] [qtp1209358542-31] INFO  c.r.c.ReimbursementController - Reimbursements retrieved by finance manager, filtered by: All
+00:23:12.322 [] [qtp1209358542-24] INFO  c.r.c.ReimbursementController - Reimbursement with id 9 Denied by finance manager id: 2, username: Manager, password: -1700428504, first name: Manager, last name: McManagerpants, email: Manage@manage.com, role: FinanceManager.
+00:23:12.734 [] [qtp1209358542-31] INFO  c.r.c.ReimbursementController - Reimbursements retrieved by finance manager, filtered by: All
+00:35:10.525 [] [main] INFO  org.eclipse.jetty.util.log - Logging initialized @369ms to org.eclipse.jetty.util.log.Slf4jLog
+00:35:10.591 [] [main] INFO  io.javalin.Javalin - Static file handler added:
+    {urlPathPrefix: "/", path: "/static", location: Location.CLASSPATH}
+    Resolved path: 'file:///C:/Users/Benjamin%20Linthicum/Desktop/Work/project1-Benjamin-Linthicum/target/classes/static/'
+00:35:10.713 [] [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.0.Final
+00:35:11.103 [] [main] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+00:35:11.261 [] [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+00:35:11.267 [] [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://javafs-210927-project-0.ci49jbdfz59e.us-east-2.rds.amazonaws.com:5432/Project0]
+00:35:11.269 [] [main] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, user=postgres}
+00:35:11.269 [] [main] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+00:35:11.273 [] [main] INFO  o.h.e.j.c.i.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20 (min=1)
+00:35:12.118 [] [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+00:35:12.842 [] [main] INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@342e690b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+00:35:13.531 [] [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+00:35:13.540 [] [main] INFO  io.javalin.Javalin - 
+           __                      __ _
+          / /____ _ _   __ ____ _ / /(_)____
+     __  / // __ `/| | / // __ `// // // __ \
+    / /_/ // /_/ / | |/ // /_/ // // // / / /
+    \____/ \__,_/  |___/ \__,_//_//_//_/ /_/
+
+        https://javalin.io/documentation
+
+00:35:13.541 [] [main] INFO  io.javalin.Javalin - Starting Javalin ...
+00:35:13.647 [] [main] INFO  io.javalin.Javalin - Listening on http://localhost:8081/
+00:35:13.647 [] [main] INFO  io.javalin.Javalin - Javalin started in 106ms \o/
+00:35:24.491 [] [qtp1209358542-28] INFO  c.r.controllers.UserController - User Employee3 logged in.
+00:35:26.035 [] [qtp1209358542-24] INFO  c.r.c.ReimbursementController - Reimbursements retrieved by employee with username Employee3.
+00:37:36.717 [] [qtp1209358542-18] INFO  c.r.controllers.UserController - User Employee3 logged in.
+00:39:44.327 [] [qtp1209358542-19] INFO  c.r.controllers.UserController - User Employee3 logged in.
+00:40:29.379 [] [qtp1209358542-24] INFO  c.r.controllers.UserController - User Employee3 logged in.
+00:40:30.436 [] [qtp1209358542-31] INFO  c.r.c.ReimbursementController - Reimbursements retrieved by employee with username Employee3.
+00:41:28.687 [] [qtp1209358542-18] INFO  c.r.controllers.UserController - User Employee3 logged in.
+00:42:17.844 [] [qtp1209358542-22] INFO  c.r.controllers.UserController - User Employee3 logged in.
+00:42:31.357 [] [qtp1209358542-24] INFO  c.r.c.ReimbursementController - Reimbursement request submitted, type: LODGING, description: test
+00:42:33.422 [] [qtp1209358542-22] INFO  c.r.c.ReimbursementController - Reimbursements retrieved by employee with username Employee3.
+00:43:04.532 [] [qtp1209358542-32] INFO  c.r.c.ReimbursementController - Reimbursement request submitted, type: LODGING, description: RegExp test
+00:43:06.006 [] [qtp1209358542-19] INFO  c.r.c.ReimbursementController - Reimbursements retrieved by employee with username Employee3.
+00:43:50.043 [] [qtp1209358542-31] INFO  c.r.controllers.UserController - User Employee3 logged in.
+00:47:53.360 [] [main] INFO  org.eclipse.jetty.util.log - Logging initialized @367ms to org.eclipse.jetty.util.log.Slf4jLog
+00:47:53.414 [] [main] INFO  io.javalin.Javalin - Static file handler added:
+    {urlPathPrefix: "/", path: "/static", location: Location.CLASSPATH}
+    Resolved path: 'file:///C:/Users/Benjamin%20Linthicum/Desktop/Work/project1-Benjamin-Linthicum/target/classes/static/'
+00:47:53.528 [] [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.0.Final
+00:47:53.960 [] [main] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+00:47:54.120 [] [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+00:47:54.125 [] [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://javafs-210927-project-0.ci49jbdfz59e.us-east-2.rds.amazonaws.com:5432/Project0]
+00:47:54.126 [] [main] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, user=postgres}
+00:47:54.126 [] [main] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+00:47:54.129 [] [main] INFO  o.h.e.j.c.i.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20 (min=1)
+00:47:54.967 [] [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+00:47:55.681 [] [main] INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@342e690b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+00:47:56.371 [] [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+00:47:56.380 [] [main] INFO  io.javalin.Javalin - 
+           __                      __ _
+          / /____ _ _   __ ____ _ / /(_)____
+     __  / // __ `/| | / // __ `// // // __ \
+    / /_/ // /_/ / | |/ // /_/ // // // / / /
+    \____/ \__,_/  |___/ \__,_//_//_//_/ /_/
+
+        https://javalin.io/documentation
+
+00:47:56.382 [] [main] INFO  io.javalin.Javalin - Starting Javalin ...
+00:47:56.480 [] [main] INFO  io.javalin.Javalin - Listening on http://localhost:8081/
+00:47:56.481 [] [main] INFO  io.javalin.Javalin - Javalin started in 100ms \o/
+00:48:04.317 [] [qtp1209358542-24] INFO  c.r.controllers.UserController - User Employee3 logged in.
+00:48:06.159 [] [qtp1209358542-30] INFO  c.r.c.ReimbursementController - Reimbursements retrieved by employee with username Employee3.
+00:48:27.543 [] [qtp1209358542-20] INFO  c.r.c.ReimbursementController - Reimbursement request submitted, type: LODGING, description: RegExp test again
+00:48:28.833 [] [qtp1209358542-24] INFO  c.r.c.ReimbursementController - Reimbursements retrieved by employee with username Employee3.
+00:55:51.773 [] [main] INFO  org.eclipse.jetty.util.log - Logging initialized @383ms to org.eclipse.jetty.util.log.Slf4jLog
+00:55:51.840 [] [main] INFO  io.javalin.Javalin - Static file handler added:
+    {urlPathPrefix: "/", path: "/static", location: Location.CLASSPATH}
+    Resolved path: 'file:///C:/Users/Benjamin%20Linthicum/Desktop/Work/project1-Benjamin-Linthicum/target/classes/static/'
+00:55:51.948 [] [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.0.Final
+00:55:52.315 [] [main] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+00:55:52.476 [] [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+00:55:52.482 [] [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://javafs-210927-project-0.ci49jbdfz59e.us-east-2.rds.amazonaws.com:5432/Project0]
+00:55:52.482 [] [main] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, user=postgres}
+00:55:52.483 [] [main] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+00:55:52.485 [] [main] INFO  o.h.e.j.c.i.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20 (min=1)
+00:55:53.312 [] [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+00:55:54.108 [] [main] INFO  org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@342e690b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+00:55:54.808 [] [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+00:55:54.817 [] [main] INFO  io.javalin.Javalin - 
+           __                      __ _
+          / /____ _ _   __ ____ _ / /(_)____
+     __  / // __ `/| | / // __ `// // // __ \
+    / /_/ // /_/ / | |/ // /_/ // // // / / /
+    \____/ \__,_/  |___/ \__,_//_//_//_/ /_/
+
+        https://javalin.io/documentation
+
+00:55:54.819 [] [main] INFO  io.javalin.Javalin - Starting Javalin ...
+00:55:54.930 [] [main] INFO  io.javalin.Javalin - Listening on http://localhost:8081/
+00:55:54.931 [] [main] INFO  io.javalin.Javalin - Javalin started in 113ms \o/
+00:56:05.125 [] [qtp1209358542-24] INFO  c.r.controllers.UserController - User Employee3 logged in.
+00:56:39.524 [] [qtp1209358542-20] INFO  c.r.c.ReimbursementController - Reimbursement request submitted, type: LODGING, description: test reimbursement
+00:56:40.893 [] [qtp1209358542-30] INFO  c.r.c.ReimbursementController - Reimbursements retrieved by employee with username Employee3.

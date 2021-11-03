@@ -9,6 +9,9 @@ import com.revature.models.*;
 import io.javalin.Javalin;
 import io.javalin.http.Handler;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -16,6 +19,7 @@ public class ReimbursementController implements Controller{
 
     private ReimbursementService reimbursementService = new ReimbursementService();
     private UserService userService = new UserService();
+    private Logger log = LoggerFactory.getLogger(ReimbursementController.class);
     
     public Handler getAllReimbursements = (ctx) -> {
         if (ctx.req.getSession(false) != null) {
@@ -51,6 +55,7 @@ public class ReimbursementController implements Controller{
             Reimbursement reimbursement = ctx.bodyAsClass(ReimbSubmit.class).convertToReimbursement();
             if (reimbursementService.addReimbursement(reimbursement)) {
                 ctx.status(201);
+                log.info("Reimbursement request submitted, type: " + reimbursement.getType() + ", description: " + reimbursement.getDescription());
             }
             else {
                 ctx.status(400);
@@ -114,6 +119,7 @@ public class ReimbursementController implements Controller{
                 }
                 ctx.json(finalList);
                 ctx.status(200);
+                log.info("Reimbursements retrieved by finance manager, filtered by: " + status);
             } catch (NumberFormatException e) {
                 e.printStackTrace();
                 ctx.status(406);
@@ -135,6 +141,7 @@ public class ReimbursementController implements Controller{
 
             ctx.json(list);
             ctx.status(200);
+            log.info("Reimbursements retrieved by employee with username " + username + ".");
         }
         else {
             ctx.status(401);
@@ -158,6 +165,7 @@ public class ReimbursementController implements Controller{
                 reimbursement.setResolved(new Timestamp(System.currentTimeMillis()));
                 if(reimbursementService.updateReimbursement(reimbursement)) {
                     ctx.status(200);
+                    log.info("Reimbursement with id " + reimbursement.getId() + " " + reimbursement.getStatus() + " by finance manager " + reimbursement.getResolver() + ".");
                 }
                 else {
                     ctx.status(400);
